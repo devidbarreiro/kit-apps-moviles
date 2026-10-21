@@ -5,11 +5,11 @@ description: Divide el MVP de una app móvil en hitos pequeños (H0, H1, H2…),
 
 # movil-hitos
 
-> **Archivos compartidos**: `REGLAS.md`, `plantillas/` y `referencias/` están en la skill `movil`, carpeta hermana de esta (`../movil/`). Si no la encuentras, búscala (`**/movil/REGLAS.md`). Si en el proyecto no existe `plan/ESTADO.md`, propón empezar por la skill `movil`.
+> **Archivos compartidos**: `REGLAS.md`, `plantillas/` y `referencias/` están en la skill `movil`, carpeta hermana de esta (`../movil/`). Si no la encuentras ahí, búscala en `~/.claude/skills/movil/` o en `~/.claude/plugins/` (`**/movil/REGLAS.md`). Si en el proyecto no existe `plan/ESTADO.md`, propón empezar por la skill `movil`.
 
 Objetivo: una hoja de ruta en la que **cada hito termina con algo que se ve en el móvil**.
 
-Lee `REGLAS.md` de la skill `movil`, `plan/ALCANCE.md`, `plan/REQUISITOS.md` y `plan/PERFIL.md`. Plantilla: `plantillas/HOJA_DE_RUTA.md`.
+Lee `REGLAS.md` de la skill `movil`, `plan/ALCANCE.md`, `plan/REQUISITOS.md` y `plan/PERFIL.md`. Plantilla: `plantillas/HOJA_DE_RUTA.md` de la skill `movil`.
 
 ## Cómo partir
 

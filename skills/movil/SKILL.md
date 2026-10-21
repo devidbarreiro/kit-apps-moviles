@@ -1,6 +1,6 @@
 ---
 name: movil
-description: Punto de entrada del kit para crear apps móviles con Expo (iOS y Android) paso a paso, pensado para quien no sabe programar. Mira en qué punto está el proyecto (carpeta plan/) y lleva a la siguiente fase - entrevista, idea y requisitos, alcance del MVP, hitos, preparar el entorno, backend, desarrollar un hito, probar en el móvil, preparar tiendas, publicar en App Store y Google Play, y actualizar. Úsala cuando digan "quiero hacer una app", "app móvil", "app para iPhone/Android", "sigamos con la app", "¿por dónde voy?", "¿qué toca ahora?", o `/movil`.
+description: Punto de entrada del kit para crear apps móviles con Expo (iOS y Android) paso a paso, pensado para quien no sabe programar. Mira en qué punto está el proyecto (carpeta plan/) y lleva a la siguiente fase - entrevista, idea y requisitos, alcance del MVP, hitos, preparar el entorno, backend, desarrollar un hito, probar en el móvil, preparar tiendas, publicar en App Store y Google Play, y actualizar. Si está instalada como plugin se invoca como `/kit-movil:movil`. Úsala cuando digan "quiero hacer una app", "app móvil", "app para iPhone/Android", "sigamos con la app", "¿por dónde voy?", "¿qué toca ahora?", o `/movil`.
 ---
 
 # movil: punto de entrada
@@ -27,7 +27,7 @@ Explica en 4-5 líneas cómo va a ir esto:
 
 > Vamos a hacerlo por fases, como una obra: primero planos (qué app, para quién, qué entra en la primera versión), luego cimientos (instalar herramientas y crear el proyecto), después la construcción por hitos pequeños que vas probando en tu móvil, y al final la publicación en las tiendas. Todo queda apuntado en una carpeta `plan/`, así que podemos parar y seguir otro día.
 
-Pregunta el nombre provisional de la app y dónde guardarla (propón `~/apps/<nombre-en-minusculas>` en Mac o `C:\Users\<usuario>\apps\<nombre>` en Windows). Crea la carpeta y `plan/`, inicializa git (`git init`) y copia `plantillas/ESTADO.md` a `plan/ESTADO.md` con la fase «entrevista». Continúa con **movil-entrevista**.
+Pregunta el nombre provisional de la app y dónde guardarla (propón `~/apps/<nombre-en-minusculas>` en Mac o `C:\apps\<nombre-en-minusculas>` en Windows: sin espacios ni tildes). Crea la carpeta y `plan/`, inicializa git (`git init`) y copia `plantillas/ESTADO.md` a `plan/ESTADO.md` con la fase «entrevista». Continúa con **movil-entrevista**.
 
 ### 3. Proyecto existente: resumen y siguiente paso
 
@@ -52,10 +52,10 @@ Pregunta si sigue por ahí o quiere hacer otra cosa.
 | No hay `HOJA_DE_RUTA.md` | `movil-hitos` |
 | H0 sin terminar (no hay `package.json` de Expo o no abre en el móvil) | `movil-preparar` |
 | El hito actual necesita base de datos, cuentas o sincronizar entre móviles y no hay backend | `movil-backend` |
-| Hay un hito pendiente | `movil-hito` |
-| Hitos del MVP terminados, sin build instalable probado | `movil-probar` |
-| Probado en móvil, faltan fichas, capturas o privacidad | `movil-tienda` |
-| Todo listo para enviar, o en revisión, o rechazado | `movil-publicar` |
+| Hay un hito H1…Hn pendiente | `movil-hito` |
+| Toca HP (prueba real), o hace falta un development build | `movil-probar` |
+| Toca HT (fichas, capturas, privacidad, testers de Google) | `movil-tienda` |
+| Toca HL: todo listo para enviar, o en revisión, o rechazado | `movil-publicar` |
 | Publicada; arreglos, mejoras o nueva versión | `movil-actualizar` |
 | Algo falla o da error (en cualquier momento) | `movil-arreglar` |
 

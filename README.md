@@ -30,7 +30,7 @@ Escribe **`/movil`** (o simplemente «quiero hacer una app») y Claude te guía 
 
 - Un ordenador **Mac o Windows** con unos 10 GB libres (30-40 GB más si en Mac quieres el simulador de iPhone, que es opcional).
 - Tu móvil (iPhone, Android o los dos).
-- **Claude Code** instalado (ver abajo) y una suscripción de Claude que lo incluya.
+- **Claude Code** instalado (ver abajo) y una suscripción de Claude que lo incluya (Pro o Max; el plan gratuito no incluye Claude Code).
 - Ganas de probar mucho en el móvil. No necesitas saber programar.
 
 ### ¿Mac o Windows?
@@ -52,31 +52,54 @@ Los precios pueden cambiar: Claude te dirá dónde comprobarlos. Desarrollar y p
 
 > **Aviso de Google Play**: si abres una cuenta personal nueva, Google exige una **prueba cerrada con al menos 12 personas durante 14 días seguidos** antes de dejarte publicar. Ve pensando en quiénes pueden ser.
 
+## Palabras que vas a oír
+
+| Palabra | Qué significa |
+|---|---|
+| **Terminal** | Una ventana donde se escriben órdenes. En Mac: Spotlight (⌘ + espacio) → «Terminal». En Windows: menú Inicio → «PowerShell». |
+| **Ruta** | La dirección de una carpeta, p. ej. `/Users/ana/apps/miapp` o `C:\apps\miapp`. |
+| **Skill** | Un manual de instrucciones que Claude lee para hacer una tarea concreta. Este kit son 13. |
+| **Plugin** | Un paquete de skills que se instala de una vez. |
+| **Expo** | Las herramientas con las que se hace la app para iPhone y Android a la vez. |
+| **EAS** | El servicio en la nube de Expo que empaqueta la app y la sube a las tiendas. |
+| **Build** | La app empaquetada, lista para instalar. |
+| **Development build** | Una versión de prueba de tu app que se conecta a tu ordenador para ver los cambios al momento. |
+| **TestFlight** | La app de Apple para instalar versiones de prueba antes de publicarlas. |
+| **Backend** | El servidor donde se guardan datos compartidos (cuentas, fotos…). Muchas apps no lo necesitan. |
+| **Hito** | Una etapa pequeña del plan que termina con algo que ves en el móvil. |
+| **Git / commit** | El historial del proyecto; un commit es un punto de guardado al que se puede volver. |
+
 ## Instalación
 
 ### 1. Instala Claude Code
 
 Sigue la guía oficial de instalación de Claude Code (busca «Claude Code install» en la documentación de Anthropic). Resumen:
 
+- **Windows, antes que nada**: instala **Git for Windows** (https://git-scm.com/download/win, todo con las opciones por defecto). Claude Code lo necesita para ejecutar órdenes.
+
 - **Mac** (Terminal): `curl -fsSL https://claude.ai/install.sh | bash`
 - **Windows** (PowerShell): `irm https://claude.ai/install.ps1 | iex`
 
-Abre una terminal nueva y escribe `claude` para comprobar que arranca.
+Cierra la terminal, abre una nueva y escribe `claude` para comprobar que arranca (la primera vez te pedirá iniciar sesión con tu cuenta de Claude).
 
 ### 2. Instala el kit
 
-**Opción A, como plugin (recomendada).** Descarga o clona esta carpeta en tu ordenador y, dentro de Claude Code, escribe:
+Primero, **consigue la carpeta del kit**: si te la han pasado en un ZIP (o desde GitHub con «Code → Download ZIP»), descomprímela donde quieras (la carpeta puede llamarse `kit-apps-moviles-main`; da igual).
+
+Para saber su **ruta**: en Mac, arrastra la carpeta a la ventana de Terminal y aparece escrita; en Windows, Mayúsculas + clic derecho sobre la carpeta → «Copiar como ruta». Si la ruta tiene espacios, ponla entre comillas.
+
+**Opción A, como plugin (recomendada).** Abre Claude Code (`claude` en la terminal) y escribe:
 
 ```
-/plugin marketplace add /ruta/a/kit-apps-moviles
+/plugin marketplace add <ruta-de-la-carpeta-del-kit>
 /plugin install kit-movil@kit-movil
 ```
 
-(En Windows, la ruta tipo `C:\Users\tu-usuario\Downloads\kit-apps-moviles`.) Si el kit está publicado en GitHub, en lugar de la ruta puedes poner `usuario/repositorio`.
+Si aparece un panel, elige instalar. Después cierra Claude Code (`/exit`) y vuelve a abrirlo. Si el kit está publicado en GitHub, en lugar de la ruta puedes poner `usuario/repositorio`.
 
 Con el plugin, las skills se llaman con el prefijo del plugin: `/kit-movil:movil`, `/kit-movil:movil-hito`… También funcionan sin escribir el comando: basta con decir «quiero hacer una app» o «sigamos con la app».
 
-**Opción B, copiando las skills.** Copia el contenido de `skills/` en tu carpeta personal de skills de Claude Code:
+**Opción B, copiando las skills.** En la terminal (fuera de Claude Code), entra en la carpeta del kit con `cd <ruta-de-la-carpeta-del-kit>` y copia el contenido de `skills/` en tu carpeta personal de skills de Claude Code:
 
 - **Mac**: `mkdir -p ~/.claude/skills && cp -R skills/* ~/.claude/skills/`
 - **Windows** (PowerShell): `New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\skills"; Copy-Item -Recurse skills\* "$env:USERPROFILE\.claude\skills\"`
@@ -85,8 +108,8 @@ Así se llaman sin prefijo: `/movil`, `/movil-hito`… Copia **todas** las carpe
 
 ### 3. Empieza
 
-1. Crea una carpeta para tus apps (por ejemplo `apps` en tu carpeta de usuario).
-2. Abre una terminal en esa carpeta y escribe `claude`.
+1. Crea una carpeta para tus apps, sin espacios ni tildes en la ruta: en Mac, `apps` dentro de tu carpeta de usuario; en Windows, `C:\apps`.
+2. Abre una terminal, entra en esa carpeta (`cd ~/apps` en Mac, `cd C:\apps` en Windows) y escribe `claude`.
 3. Escribe `/movil` (o `/kit-movil:movil`) y responde a las preguntas.
 
 Para **seguir otro día**: abre Claude Code en la carpeta de tu app y escribe `/movil`. Leerá `plan/ESTADO.md` y te dirá dónde lo dejaste y qué toca.
@@ -97,7 +120,8 @@ Para **seguir otro día**: abre Claude Code en la carpeta de tu app y escribe `/
 - **Si algo no te cuadra, dilo.** «Esto no es lo que quería» es la frase más útil que le puedes decir a Claude.
 - **No compartas claves ni contraseñas en el chat** si no hace falta, y nunca las subas a GitHub. Claude te dirá dónde va cada cosa.
 - **Claude no paga, no abre cuentas por ti ni publica sin que se lo digas.** Esas decisiones son tuyas.
-- Si tienes el servidor MCP **context7** instalado en Claude Code, Claude lo usará para consultar la documentación actualizada de cada librería. Si no, usará la web oficial.
+- **Ten dos terminales abiertas**: en una hablas con Claude; en la otra, cuando Claude te lo pida, arrancas la app (`npx expo start`) o inicias sesión en servicios. Claude te dirá qué escribir.
+- Claude consulta la documentación oficial en internet antes de programar. (Si algún día instalas la extensión *context7*, la usará para ir más rápido; no es necesaria.)
 
 ## Qué hay en el kit
 

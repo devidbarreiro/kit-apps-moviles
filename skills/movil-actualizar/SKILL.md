@@ -5,7 +5,7 @@ description: Mantiene y actualiza una app Expo ya publicada - decide entre EAS U
 
 # movil-actualizar
 
-> **Archivos compartidos**: `REGLAS.md`, `plantillas/` y `referencias/` están en la skill `movil`, carpeta hermana de esta (`../movil/`). Si no la encuentras, búscala (`**/movil/REGLAS.md`). Si en el proyecto no existe `plan/ESTADO.md`, propón empezar por la skill `movil`.
+> **Archivos compartidos**: `REGLAS.md`, `plantillas/` y `referencias/` están en la skill `movil`, carpeta hermana de esta (`../movil/`). Si no la encuentras ahí, búscala en `~/.claude/skills/movil/` o en `~/.claude/plugins/` (`**/movil/REGLAS.md`). Si en el proyecto no existe `plan/ESTADO.md`, propón empezar por la skill `movil`.
 
 Lee `REGLAS.md` y `referencias/trampas.md` de la skill `movil`, `plan/ESTADO.md` (versiones publicadas) y `plan/ALCANCE.md` («Se queda fuera»). Doc: https://docs.expo.dev/eas-update/introduction/.
 
@@ -32,7 +32,7 @@ eas update --channel preview --environment preview --message "Arregla el botón 
 eas update --channel production --environment production --message "Arregla el botón de guardar"
 ```
 - **Siempre a `preview` primero** y probado en un móvil.
-- Si sale mal: vuelve a publicar la actualización anterior (`eas update:republish`) o usa el *rollback* de EAS; compruébalo en la doc.
+- Si sale mal: `eas update:rollback` o vuelve a publicar la anterior con `eas update:republish`; comprueba la sintaxis en la doc.
 - Solo con su «sí» explícito para `production`.
 
 ## 2. Versión nueva

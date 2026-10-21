@@ -5,7 +5,7 @@ description: Desarrolla el siguiente hito de la hoja de ruta de una app móvil E
 
 # movil-hito
 
-> **Archivos compartidos**: `REGLAS.md`, `plantillas/` y `referencias/` están en la skill `movil`, carpeta hermana de esta (`../movil/`). Si no la encuentras, búscala (`**/movil/REGLAS.md`). Si en el proyecto no existe `plan/ESTADO.md`, propón empezar por la skill `movil`.
+> **Archivos compartidos**: `REGLAS.md`, `plantillas/` y `referencias/` están en la skill `movil`, carpeta hermana de esta (`../movil/`). Si no la encuentras ahí, búscala en `~/.claude/skills/movil/` o en `~/.claude/plugins/` (`**/movil/REGLAS.md`). Si en el proyecto no existe `plan/ESTADO.md`, propón empezar por la skill `movil`.
 
 El bucle de construcción: **planear → consultar docs → programar → comprobar → ella prueba → guardar**. Un hito cada vez.
 
@@ -32,7 +32,7 @@ Para cada librería o API que vayas a usar:
 - Usa componentes de React Native y Expo antes que crear los tuyos: `Pressable`, `FlatList`, `expo-image` (no `Image` para fotos remotas), `SafeAreaView`/`useSafeAreaInsets`, `Stack`/`Tabs` de expo-router.
 - Accesibilidad básica: `accessibilityLabel` en botones con solo icono, tamaño mínimo táctil ~44 pt, respeta el tamaño de letra del sistema.
 - Textos para el usuario en su idioma, sin jerga técnica. Los errores que ve el usuario dicen qué hacer («Sin conexión. Inténtalo de nuevo»); el detalle técnico va al registro, no a la pantalla.
-- Lógica en funciones puras con su test (Vitest o `node --test`) cuando haya cálculos o reglas.
+- Lógica en funciones puras con su test cuando haya cálculos o reglas. La primera vez que haga falta, configura Vitest (`npm install -D vitest` y un script `"test": "vitest run"` en `package.json`; comprueba la doc de Vitest).
 - Si pide un permiso (cámara, ubicación, notificaciones, fotos): pídelo **en el momento en que se usa**, nunca al abrir la app; texto concreto del porqué en el *config plugin* del módulo; alternativa si dice que no. Desactiva en el plugin los permisos que no uses (ver trampas).
 - Datos nuevos → actualiza `plan/PRIVACIDAD.md`.
 
@@ -52,7 +52,7 @@ Prueba también: sin conexión (modo avión), con texto muy largo, con lista vac
 - Commit por paso que funcione; al cerrar el hito, `H<n>: <resumen>`.
 - `H<n>.md`: marca pasos y verificación, fecha de fin, problemas encontrados.
 - `HOJA_DE_RUTA.md`: marca el hito.
-- `ESTADO.md`: progreso, último paso, siguiente paso exacto, decisiones.
+- `ESTADO.md`: progreso, último paso, siguiente paso exacto, decisiones. Si era el último hito del MVP, fase → «pruebas».
 - Pregunta: ¿seguimos con el siguiente hito o lo dejamos aquí?
 
 ## Reglas duras

@@ -5,7 +5,7 @@ description: Decide si una app móvil necesita backend y, si sí, lo monta con S
 
 # movil-backend
 
-> **Archivos compartidos**: `REGLAS.md`, `plantillas/` y `referencias/` están en la skill `movil`, carpeta hermana de esta (`../movil/`). Si no la encuentras, búscala (`**/movil/REGLAS.md`). Si en el proyecto no existe `plan/ESTADO.md`, propón empezar por la skill `movil`.
+> **Archivos compartidos**: `REGLAS.md`, `plantillas/` y `referencias/` están en la skill `movil`, carpeta hermana de esta (`../movil/`). Si no la encuentras ahí, búscala en `~/.claude/skills/movil/` o en `~/.claude/plugins/` (`**/movil/REGLAS.md`). Si en el proyecto no existe `plan/ESTADO.md`, propón empezar por la skill `movil`.
 
 Lee `REGLAS.md` y `referencias/trampas.md` (sección Supabase) de la skill `movil`, `plan/REQUISITOS.md` y `plan/ALCANCE.md`. Documentación: https://supabase.com/docs (guías de Expo/React Native, RLS, Auth).
 
@@ -28,7 +28,7 @@ Si hace falta, recomienda **Supabase** (Postgres gestionado, autenticación, alm
 
 1. Ella crea la cuenta y el proyecto en https://supabase.com (región cercana a sus usuarios). Tú no creas cuentas.
 2. En la app: `npx expo install @supabase/supabase-js @react-native-async-storage/async-storage react-native-url-polyfill` y sigue la guía oficial de Expo de Supabase para el cliente (sesión persistida en AsyncStorage; o `expo-secure-store` para el token si la guía lo recomienda).
-3. Variables: `EXPO_PUBLIC_SUPABASE_URL` y la clave **pública** (`anon` / `publishable`) en `.env` y en EAS (`eas env:create`). La clave `service_role` / `secret` **nunca** en la app ni en el repo.
+3. Variables: `EXPO_PUBLIC_SUPABASE_URL` y la clave **pública** (`anon` / `publishable`) en `.env` y en EAS (`eas env:set`, ver `movil-preparar`). La clave `service_role` / `secret` **nunca** en la app ni en el repo.
 4. Supabase CLI (`npx supabase init`, `npx supabase link`) para tener las **migraciones en git** (`supabase/migrations/`). Todo cambio de esquema es una migración, no clics en el panel. Supabase local necesita Docker: opcional; si no lo tiene, trabaja contra un proyecto de **desarrollo** separado del de producción.
 
 ## 3. Seguridad (no negociable)
@@ -64,7 +64,7 @@ Si hace falta, recomienda **Supabase** (Postgres gestionado, autenticación, alm
 
 ## 5. Planes gratuitos: no te duermas
 
-Los proyectos gratuitos de Supabase **se pausan tras unos días sin actividad** (consulta el plazo actual). Si el revisor de Apple o Google abre la app con el backend pausado, la verá rota y la rechazará. Mientras la app esté publicada: plan de pago, o una tarea programada diaria (p. ej. GitHub Actions con `schedule`) que haga una consulta real (una RPC sencilla). Las tareas programadas de GitHub solo corren desde la rama principal y se desactivan tras 60 días sin actividad en el repositorio.
+Los proyectos gratuitos de Supabase **se pausan tras unos días sin actividad** (consulta el plazo actual). Si el revisor de Apple o Google abre la app con el backend pausado, la verá rota y la rechazará. Mientras la app esté publicada: plan de pago, o una tarea programada diaria (p. ej. GitHub Actions con `schedule`) que haga una consulta real (una RPC sencilla). Las tareas programadas de GitHub solo corren desde la rama principal y, en repositorios públicos, se desactivan tras 60 días sin actividad; comprueba de vez en cuando que siguen corriendo.
 
 ## 6. Privacidad
 

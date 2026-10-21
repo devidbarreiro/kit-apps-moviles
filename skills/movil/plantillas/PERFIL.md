@@ -3,7 +3,7 @@
 _Actualizado: AAAA-MM-DD_
 
 ## Ordenador
-- Sistema: Mac / Windows / Linux
+- Sistema: Mac / Windows
 - Modelo y espacio libre en disco: …
 - ¿Puede instalar programas (permisos de administrador)?: sí / no
 

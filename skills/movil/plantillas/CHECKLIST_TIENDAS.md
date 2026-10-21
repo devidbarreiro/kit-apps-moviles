@@ -22,7 +22,7 @@ _Actualizado: AAAA-MM-DD_ · Marca cada casilla solo cuando esté comprobada.
 - [ ] App creada en App Store Connect con el bundle identifier definitivo
 - [ ] `ios.supportsTablet: false` si no está diseñada para iPad (si no, piden capturas de iPad y la revisan en iPad)
 - [ ] `ios.infoPlist.ITSAppUsesNonExemptEncryption: false` (si solo usa HTTPS estándar)
-- [ ] Capturas de iPhone en el tamaño que pida App Store Connect hoy (mín. 3, máx. 10)
+- [ ] Capturas de iPhone en el tamaño que pida App Store Connect hoy (de 1 a 10; recomendable 3 o más)
 - [ ] Subtítulo (30 caracteres), descripción, palabras clave (100 caracteres), categoría
 - [ ] Etiquetas de privacidad («Privacidad de la app») rellenas desde `plan/PRIVACIDAD.md`
 - [ ] Clasificación por edades respondida con honestidad

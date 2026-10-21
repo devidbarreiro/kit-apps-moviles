@@ -7,6 +7,7 @@ Estas reglas valen en **todas** las skills `movil-*`. Léelas una vez por sesió
 - Habla en castellano llano. Si usas un término técnico, explícalo en una frase la primera vez («un *build* es la app empaquetada lista para instalar»).
 - Una pregunta cada vez, con opciones cuando se pueda (usa la herramienta de preguntas si existe). Propón siempre una opción recomendada y di por qué.
 - Antes de cada comando que vaya a ejecutar ella, di **qué hace y qué debería ver**. Si lo ejecutas tú, di qué has hecho en una línea.
+- **Comandos interactivos o que se quedan corriendo** (`npx expo start`, `eas login`, `eas init`, el primer `eas build` y `eas submit` de cada plataforma, `eas device:create`, `eas credentials`): tu terminal no muestra el QR ni deja escribir contraseñas. Pídele que abra **una segunda terminal** en la carpeta del proyecto y los ejecute ella; dile exactamente qué escribir y qué verá. Los que lances tú, en modo no interactivo (`--non-interactive`) cuando exista.
 - Nunca le pidas que edite código a mano. Lo editas tú; ella prueba en el móvil y te cuenta qué ve.
 - Al terminar cada paso: qué ha cambiado, cómo comprobarlo y cuál es el siguiente paso.
 
@@ -34,12 +35,13 @@ Antes de escribir código o dar instrucciones de una librería, servicio o tiend
 - Si una librería trae código nativo, no funciona en Expo Go: hace falta un *development build* (ver `movil-probar`). Avísalo antes de instalarla.
 - No mezcles gestores de paquetes: un único lockfile (`package-lock.json` si usa npm).
 - En el kit, `eas …` es la CLI de EAS. Si no está instalada globalmente, usa `npx eas-cli@latest …`.
+- En Windows, Claude Code usa Git Bash para ejecutar comandos: los comandos tipo `rm -rf`, `cp -R` funcionan en tu terminal. Cuando sea ella quien escribe en PowerShell, dale la versión de PowerShell.
 - Comandos para Mac y Windows: si un comando cambia en PowerShell (borrar carpetas, variables de entorno, rutas), da las dos versiones según `plan/PERFIL.md`.
 
 ## 4. Seguridad y privacidad desde el día 1
 
 - **Ninguna clave secreta en el repositorio.** Las variables públicas del cliente van con prefijo `EXPO_PUBLIC_` en `.env` (ignorado por git) y en las variables de entorno de EAS. Todo lo que lleva `EXPO_PUBLIC_` acaba dentro de la app y cualquiera puede leerlo: solo claves *públicas* (p. ej. la `anon`/`publishable` de Supabase). Las secretas (`service_role`, claves de pago, de IA…) **solo** en el servidor (funciones de Supabase, secretos de EAS).
-- `.gitignore` debe incluir `.env*`, `*.p8`, `*.p12`, `*.jks`, `*.keystore`, `google-services*.json` y claves de cuentas de servicio, salvo decisión explícita.
+- `.gitignore` debe incluir `.env*` (con la excepción `!.env.example`, que sí se sube con los nombres de las variables y valores vacíos), `*.p8`, `*.p12`, `*.jks`, `*.keystore`, `google-services*.json` y claves de cuentas de servicio, salvo decisión explícita.
 - Si hay base de datos: **RLS activado en todas las tablas** desde la primera migración (ver `movil-backend`).
 - Lleva desde el principio una lista de **qué datos recoge la app y para qué** en `plan/PRIVACIDAD.md`. Las tiendas la pedirán (etiquetas de privacidad de Apple, «Seguridad de los datos» de Google).
 - Si la app tiene cuentas, **borrar la cuenta desde la propia app** es obligatorio en ambas tiendas. Planéalo en el MVP.
@@ -57,11 +59,15 @@ Todo el plan vive en la carpeta `plan/` del proyecto:
 | `plan/HOJA_DE_RUTA.md` | `movil-hitos` | Hitos con objetivo, requisitos y criterios de «hecho» |
 | `plan/ESTADO.md` | todas | Fase actual, hito actual, último paso, siguiente paso, bloqueos, decisiones |
 | `plan/PRIVACIDAD.md` | `movil-idea` y siguientes | Datos que recoge la app, para qué y con quién se comparten |
-| `plan/hitos/H<n>.md` | `movil-hito` | Plan y verificación de cada hito |
+| `plan/hitos/H<n>.md` | `movil-hito` (y `movil-probar` para HP) | Plan y verificación de cada hito |
+| `plan/CHECKLIST_TIENDAS.md` | `movil-tienda` | Checklist de publicación marcado |
+| `plan/FICHA.md` | `movil-tienda` | Textos de la ficha por tienda, con recuento de caracteres, y respuestas a los cuestionarios |
+| `plan/RECHAZOS.md` | `movil-publicar` | Cada rechazo: fecha, directriz, causa, cambio y respuesta enviada |
 
 Reglas:
 - **Lee `plan/ESTADO.md` al empezar** cualquier skill y **actualízalo al terminar** (fecha, qué se hizo, siguiente paso). Es lo único que permite seguir mañana sin perder el hilo.
-- Las plantillas están en la skill `movil`, carpeta `plantillas/`.
+- Las plantillas están en la skill `movil`, carpeta `plantillas/`. `FICHA.md` y `RECHAZOS.md` no tienen plantilla: créalos con una sección por versión.
+- Si el kit está instalado como plugin, las skills llevan prefijo (`/kit-movil:movil`, `/kit-movil:movil-hito`…). Cuando le digas a la persona qué escribir, usa el nombre que vea en su instalación.
 - Registra cada decisión importante en `ESTADO.md` → «Decisiones» con una línea de por qué.
 
 ## 6. Git como red de seguridad

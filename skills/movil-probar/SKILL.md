@@ -5,7 +5,7 @@ description: Lleva una app Expo del ordenador al móvil de verdad - Expo Go fren
 
 # movil-probar
 
-> **Archivos compartidos**: `REGLAS.md`, `plantillas/` y `referencias/` están en la skill `movil`, carpeta hermana de esta (`../movil/`). Si no la encuentras, búscala (`**/movil/REGLAS.md`). Si en el proyecto no existe `plan/ESTADO.md`, propón empezar por la skill `movil`.
+> **Archivos compartidos**: `REGLAS.md`, `plantillas/` y `referencias/` están en la skill `movil`, carpeta hermana de esta (`../movil/`). Si no la encuentras ahí, búscala en `~/.claude/skills/movil/` o en `~/.claude/plugins/` (`**/movil/REGLAS.md`). Si en el proyecto no existe `plan/ESTADO.md`, propón empezar por la skill `movil`.
 
 Lee `REGLAS.md` y `referencias/trampas.md` de la skill `movil`, `plan/PERFIL.md` y `plan/ESTADO.md`. Doc: https://docs.expo.dev/develop/development-builds/introduction/ y https://docs.expo.dev/build/introduction/.
 
@@ -30,7 +30,7 @@ eas build --profile development --platform ios         # iPhone físico (registr
 npx expo start --dev-client
 ```
 
-- **iPhone físico**: antes, `eas device:create` y abrir el enlace en el iPhone para registrarlo; activar «Modo desarrollador» en Ajustes → Privacidad y seguridad. Necesita Apple Developer de pago.
+- **iPhone físico**: antes, `eas device:create` (interactivo: lo ejecuta ella) y abrir el enlace en el iPhone para registrarlo; activar «Modo desarrollador» en Ajustes → Privacidad y seguridad. Necesita Apple Developer de pago.
 - **Simulador de iPhone** (solo Mac con Xcode): perfil con `ios.simulator: true`.
 - **Windows + iPhone**: todo lo anterior funciona desde Windows; EAS compila en la nube. La alternativa sin registrar el móvil es TestFlight (más abajo).
 - Cada vez que añadas o cambies algo **nativo** (librería, permiso, plugin, icono), hay que hacer **otro** development build. Cambios solo de código JS: no.
@@ -67,5 +67,5 @@ eas submit --platform ios --latest
 
 ## Salida
 
-- `plan/ESTADO.md`: qué builds hay, en qué móviles se ha probado, problemas abiertos.
+- `plan/ESTADO.md`: fase → «tiendas» cuando HP esté hecho; qué builds hay, en qué móviles se ha probado, problemas abiertos.
 - Siguiente: **movil-tienda**.

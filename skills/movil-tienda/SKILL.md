@@ -5,7 +5,7 @@ description: Prepara una app móvil para App Store y Google Play - cuentas de de
 
 # movil-tienda
 
-> **Archivos compartidos**: `REGLAS.md`, `plantillas/` y `referencias/` están en la skill `movil`, carpeta hermana de esta (`../movil/`). Si no la encuentras, búscala (`**/movil/REGLAS.md`). Si en el proyecto no existe `plan/ESTADO.md`, propón empezar por la skill `movil`.
+> **Archivos compartidos**: `REGLAS.md`, `plantillas/` y `referencias/` están en la skill `movil`, carpeta hermana de esta (`../movil/`). Si no la encuentras ahí, búscala en `~/.claude/skills/movil/` o en `~/.claude/plugins/` (`**/movil/REGLAS.md`). Si en el proyecto no existe `plan/ESTADO.md`, propón empezar por la skill `movil`.
 
 Lee `REGLAS.md` y `referencias/tiendas.md` de la skill `movil`, `plan/PRIVACIDAD.md` y `plan/ALCANCE.md`. Copia `plantillas/CHECKLIST_TIENDAS.md` a `plan/CHECKLIST_TIENDAS.md` y ve marcando. Comprueba los requisitos actuales en la ayuda oficial de App Store Connect y de Play Console antes de dar tamaños o límites.
 
@@ -59,4 +59,5 @@ Rellénalos con ella, desde `plan/PRIVACIDAD.md`, **con honestidad**: declarar d
 
 - `plan/CHECKLIST_TIENDAS.md` marcado, URLs de privacidad y soporte apuntadas en `ESTADO.md`.
 - Textos de la ficha en `plan/FICHA.md` (por tienda, con recuento de caracteres) y respuestas de los cuestionarios: así la siguiente versión es copiar y ajustar.
+- `plan/ESTADO.md`: fase → «publicación», HT marcado.
 - Siguiente: **movil-publicar**.

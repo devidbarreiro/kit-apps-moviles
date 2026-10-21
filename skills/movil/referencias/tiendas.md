@@ -34,7 +34,7 @@ Tiempos vistos: Apple suele contestar en 1-2 días (la primera vez, más). Del p
 ## Recursos gráficos
 
 - **Icono**: Apple 1024×1024 **sin** transparencia; Google 512×512 (PNG de 32 bits) y icono adaptativo con capa monocroma.
-- **Capturas de iPhone**: App Store Connect pide el tamaño grande actual (p. ej. 6,9"); a veces también 6,5". Los simuladores dan tamaños exactos: elige el modelo cuyo tamaño nativo coincide (no todos valen). Mín. 3, máx. 10. Cambiarlas no requiere build.
+- **Capturas de iPhone**: App Store Connect pide el tamaño grande actual (p. ej. 6,9"); a veces también 6,5". Los simuladores dan tamaños exactos: elige el modelo cuyo tamaño nativo coincide (no todos valen). De 1 a 10 (recomendable 3 o más). Cambiarlas no requiere build.
 - `supportsTablet: false` si no está diseñada para iPad: si no, piden capturas de iPad y la revisan en iPad. Tiene efecto solo en un build nuevo.
 - **Google**: 2-8 capturas de teléfono (al menos 4 de ≥1080 px para optar a recomendaciones), gráfico destacado 1024×500 sin transparencia.
 - **Vídeo de vista previa de Apple**: pista de audio obligatoria (aunque sea silencio), debe entenderse sin sonido, interfaz real.
@@ -72,11 +72,11 @@ Tiempos vistos: Apple suele contestar en 1-2 días (la primera vez, más). Del p
 |---|---|---|
 | **Apple 5.1.1(iv)** | La pantalla previa al permiso de cámara tenía un botón «Dar permiso» | Botón neutro «Continuar», enlace a Ajustes si lo deniega y alternativa manual (escribir el código a mano) |
 | **Apple 2.1(a)** (la app falla) | Error al crear una sala online: el backend gratuito se había pausado y ni resolvía DNS | Respuesta admitiendo el fallo, explicando que era el servidor y no el binario, y con 3 acciones concretas (aviso de reconexión, monitorización, tarea diaria que lo mantiene despierto) |
-| **Apple 4.3(b)** | Un juego para beber: Apple no acepta esa temática aunque se declare bien | Cambio de concepto completo (motor, textos, web, capturas, clasificación) y build nuevo |
-| **Apple 1.4.3** tras el cambio | Quedaban números sin unidad que «sonaban» a tragos, **capturas viejas** en la consola y la respuesta anterior decía «hemos quitado el modo de beber» | Unidades explícitas en todas partes, capturas nuevas y respuesta neutra preguntando qué pantalla lo provocaba. Lección: **tu respuesta puede reactivar el rechazo** |
+| **Apple 4.3(b)** | Un juego de una temática que Apple no quiere en la tienda (relacionada con el alcohol), aunque se declarara bien | Cambio de concepto completo (motor, textos, web, capturas, clasificación) y build nuevo |
+| **Apple 1.4.3** tras el cambio | Quedaban textos ambiguos que recordaban al concepto anterior, **capturas viejas** en la consola y la respuesta anterior describía lo que se había quitado | Unidades explícitas en todas partes, capturas nuevas y respuesta neutra preguntando qué pantalla lo provocaba. Lección: **tu respuesta puede reactivar el rechazo** |
 | **Apple ITMS-90683** | Faltaba el texto de un permiso (movimiento) que una librería de ubicación enlaza aunque no se use | Texto honesto añadido y build nuevo |
 | **Apple, revisión ampliada** | Aviso tras varios rechazos | No reenviar sin cambios; responder primero en el Centro de resoluciones o pedir «Meet with Apple» |
-| **Google, afirmaciones engañosas** | La ficha parecía de un organismo oficial porque enlazaba normativa | Aviso de «app independiente» en descripción, «Acerca de» y la propia app; fuentes oficiales enlazadas; reenviado en dos días |
+| **Google, afirmaciones engañosas** | La ficha parecía de un organismo oficial porque mostraba información pública | Aviso de «app independiente» en descripción, «Acerca de» y la propia app; fuentes oficiales enlazadas; reenviado en dos días |
 | **Apple, permisos especiales** (*entitlements*) | Solicitud rechazada por falta de detalle | Reenviada con quién prueba la app, cómo se comporta si falla y cómo llegan los avisos críticos |
 
 Cómo responder: inglés, corto, verificable (qué cambió y dónde verlo), sin discutir y sin describir lo que la app era antes. Guarda cada rechazo y su respuesta en `plan/RECHAZOS.md`.

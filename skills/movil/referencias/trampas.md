@@ -4,10 +4,10 @@ Errores reales que nos encontramos en apps Expo publicadas, con su arreglo. Ante
 
 ## Configuración y variables
 
-- **Los builds de EAS no ven tu `.env`** (EAS respeta `.gitignore`). La app sale «vacía» sin error. → Crea las variables con `eas env:create` en cada entorno, y un `src/config.ts` que **lance un error con el nombre de la variable** si falta en producción (y si está a medias: URL sin clave).
+- **Los builds de EAS no ven tu `.env`** (EAS respeta `.gitignore`). La app sale «vacía» sin error. → Crea las variables en EAS (`eas env:set`; antes `eas env:create`) en cada entorno, y un `src/config.ts` que **lance un error con el nombre de la variable** si falta en producción (y si está a medias: URL sin clave).
 - **`EXPO_PUBLIC_*` acaban dentro de la app.** Márcalas como `plaintext` en EAS; marcarlas como secretas da falsa seguridad. Secretos de verdad solo en el servidor.
 - **Opciones de *config plugins* se incrustan en el manifiesto de la app.** Nunca pongas un token secreto en la configuración de un plugin; pásalo como variable de entorno del build si la librería lo permite.
-- **Ficheros de configuración de Google** (`google-services.json`): fuera del repo, como variable de EAS tipo fichero (`eas env:create --type file`).
+- **Ficheros de configuración de Google** (`google-services.json`): fuera del repo, como variable de EAS tipo fichero (`--type file`).
 - **Revisa la configuración final** antes de cada build: `npx expo config --type public` o `--type introspect` (permisos y Info.plist resultantes).
 
 ## Permisos
