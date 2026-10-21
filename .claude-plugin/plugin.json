@@ -1,0 +1,10 @@
+{
+  "name": "kit-movil",
+  "description": "Kit para crear apps móviles con Expo de principio a fin, pensado para quien no programa: entrevista inicial, requisitos, alcance, hitos, desarrollo guiado, pruebas en el móvil y publicación en App Store y Google Play.",
+  "version": "0.1.0",
+  "author": {
+    "name": "David Barreiro"
+  },
+  "license": "PENDIENTE",
+  "keywords": ["expo", "react-native", "ios", "android", "app-store", "google-play", "principiantes", "español"]
+}

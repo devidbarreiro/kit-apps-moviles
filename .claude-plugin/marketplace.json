@@ -1,0 +1,14 @@
+{
+  "name": "kit-movil",
+  "description": "Kit para crear y publicar apps móviles con Expo, en español.",
+  "owner": {
+    "name": "David Barreiro"
+  },
+  "plugins": [
+    {
+      "name": "kit-movil",
+      "source": "./",
+      "description": "Entrevista, requisitos, alcance, hitos, desarrollo con Expo, pruebas y publicación en las tiendas."
+    }
+  ]
+}
