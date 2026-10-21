@@ -20,7 +20,7 @@ Lee `REGLAS.md` y `referencias/trampas.md` (sección Supabase) de la skill `movi
 | Notificaciones push enviadas desde «fuera» | Sí (algo que las envíe). |
 | Usar una API con clave secreta (IA, pagos…) | Sí: la llamada va **desde el servidor**, nunca desde la app. |
 
-Sin backend la app es más simple, más privada y más fácil de aprobar. Si no hace falta, dilo y vuelve.
+**Por defecto, no.** Sin backend la app es más simple, más privada, más barata y más fácil de aprobar: los datos se guardan en el móvil con `expo-sqlite` (datos con estructura) o AsyncStorage (preferencias), según https://docs.expo.dev/develop/user-interface/store-data/. Solo se monta si hay **cuentas**, **sincronización entre dispositivos** o **datos compartidos entre personas** (o una clave secreta que no puede ir en la app), y el porqué tiene que estar escrito en `plan/REQUISITOS.md` → «¿Hace falta servidor?». Si no está justificado, dilo y vuelve.
 
 Si hace falta, recomienda **Supabase** (Postgres gestionado, autenticación, almacenamiento de ficheros, funciones; plan gratuito). Alternativas si ella prefiere: Firebase, Convex. Este kit detalla Supabase.
 

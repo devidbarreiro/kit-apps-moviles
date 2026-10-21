@@ -14,24 +14,26 @@ Lee `REGLAS.md` de la skill `movil`, `plan/ALCANCE.md`, `plan/REQUISITOS.md` y `
 ## Cómo partir
 
 1. **H0 · Preparación** siempre primero: herramientas, proyecto Expo creado, app en blanco abierta en su móvil, git.
-2. **H1 · El esqueleto navegable**: todas las pantallas del MVP con datos falsos y navegación entre ellas. Le permite «tocar» la app muy pronto y cambiar de idea barato.
-3. **H2…Hn · Una funcionalidad de punta a punta por hito**, en orden de valor: primero lo que hace única a la app. Cada hito cubre requisitos concretos (IDs).
-4. Si hay backend: un hito propio justo antes del primero que lo necesite («datos reales y cuentas»), con RLS desde el principio.
-5. Lo «obligatorio de tienda» (borrar cuenta, ajustes, privacidad, soporte) en un hito propio antes de la prueba real; no lo dejes para el final.
-6. **HP · Prueba real**: build instalable (TestFlight / prueba interna de Google) usado por 2-3 personas una semana.
-7. **HT · Tiendas**: fichas, capturas, privacidad. Si es cuenta personal nueva de Google, la **prueba cerrada de 14 días** empieza aquí: arráncala cuanto antes, puede solaparse con los últimos arreglos.
-8. **HL · Lanzamiento**.
+2. **H0.5 · App en blanco en la tienda**, justo después: la app vacía (con su nombre, icono provisional y bundle id definitivo) compilada con `eas build`, en **TestFlight interno** (iPhone) y en la **prueba interna de Google Play** (Android, el primer AAB subido a mano). Sin funciones todavía. Sirve para destapar pronto lo que más tarda y más asusta (cuentas de desarrollador, certificados, firma, nombre ocupado, verificación de identidad) cuando aún no hay nada que romper. Necesita las cuentas de Apple y/o Google pagadas: si ella decide pagar más tarde, colócalo como primer hito tras pagar, siempre **antes** de HP. Se hace con `movil-probar` (sección H0.5).
+3. **H1 · El esqueleto navegable**: todas las pantallas del MVP con datos falsos y navegación entre ellas. Le permite «tocar» la app muy pronto y cambiar de idea barato.
+4. **H2…Hn · Una funcionalidad de punta a punta por hito**, en orden de valor: primero lo que hace única a la app. Cada hito cubre requisitos concretos (IDs).
+5. Si hay backend (solo si `ALCANCE.md` lo justifica; por defecto, datos en el móvil): un hito propio justo antes del primero que lo necesite («datos reales y cuentas»), con RLS desde el principio.
+6. Lo «obligatorio de tienda» (borrar cuenta, ajustes, privacidad, soporte) en un hito propio antes de la prueba real; no lo dejes para el final.
+7. **HP · Prueba real**: build instalable (TestFlight / prueba interna de Google) usado por 2-3 personas una semana.
+8. **HT · Tiendas**: fichas, capturas, privacidad. Si es cuenta personal nueva de Google, la **prueba cerrada de 14 días** empieza aquí: arráncala cuanto antes, puede solaparse con los últimos arreglos.
+9. **HL · Lanzamiento**.
 
 ## Reglas
 
 - Hitos de 1-2 semanas para alguien que dedica pocas horas. Si un hito tiene más de 5 criterios, pártelo.
 - Criterios de «hecho» observables por ella, sin jerga: «Al pulsar Guardar, la nota aparece en la lista y sigue ahí al cerrar y abrir la app».
 - Cada requisito del MVP aparece en algún hito. Comprueba la cobertura y dilo («los 9 requisitos del MVP están repartidos»).
-- Marca qué hitos requieren *development build* (librerías nativas: mapas, notificaciones push, login con Google/Apple, compras, widgets): conviene pasar a development build en el hito anterior.
+- Marca qué hitos requieren *development build* (librerías nativas: mapas nativos, notificaciones push, login con Google/Apple, compras, widgets): conviene pasar a development build en el hito anterior. En iPhone, ese hito es también cuándo hay que haber pagado Apple: dilo.
+- Tiempo realista: dile la suma aproximada en semanas según sus horas (`PERFIL.md`), más 1-2 semanas de tiendas y, si es cuenta personal nueva de Google, los 14 días de prueba cerrada.
 
 ## Salida
 
 1. `plan/HOJA_DE_RUTA.md`.
-2. `plan/ESTADO.md`: fase → «preparación», hito actual H0, progreso.
+2. `plan/ESTADO.md`: fase → «preparación», hito actual H0, progreso (H0 y H0.5 incluidos).
 3. Commit: `plan: hoja de ruta`.
 4. Siguiente: **movil-preparar**.

@@ -5,6 +5,17 @@
   "author": {
     "name": "David Barreiro"
   },
-  "license": "PENDIENTE",
-  "keywords": ["expo", "react-native", "ios", "android", "app-store", "google-play", "principiantes", "español"]
+  "license": "MIT",
+  "keywords": [
+    "expo",
+    "react-native",
+    "ios",
+    "android",
+    "app-store",
+    "google-play",
+    "principiantes",
+    "español"
+  ],
+  "homepage": "https://devidbarreiro.github.io/kit-apps-moviles/",
+  "repository": "https://github.com/devidbarreiro/kit-apps-moviles"
 }

@@ -32,7 +32,7 @@ Para cada librería o API que vayas a usar:
 - Usa componentes de React Native y Expo antes que crear los tuyos: `Pressable`, `FlatList`, `expo-image` (no `Image` para fotos remotas), `SafeAreaView`/`useSafeAreaInsets`, `Stack`/`Tabs` de expo-router.
 - Accesibilidad básica: `accessibilityLabel` en botones con solo icono, tamaño mínimo táctil ~44 pt, respeta el tamaño de letra del sistema.
 - Textos para el usuario en su idioma, sin jerga técnica. Los errores que ve el usuario dicen qué hacer («Sin conexión. Inténtalo de nuevo»); el detalle técnico va al registro, no a la pantalla.
-- Lógica en funciones puras con su test cuando haya cálculos o reglas. La primera vez que haga falta, configura Vitest (`npm install -D vitest` y un script `"test": "vitest run"` en `package.json`; comprueba la doc de Vitest).
+- Lógica en funciones puras con su test cuando haya cálculos o reglas. La primera vez que haga falta, configura **jest-expo** siguiendo https://docs.expo.dev/develop/unit-testing/ (comprueba la doc antes: la versión de Jest depende del SDK). A fecha 2026-10: `npx expo install jest-expo jest @types/jest --dev`, `"jest": { "preset": "jest-expo" }` en `package.json` y `"jest"` en `types` de `tsconfig.json`. La doc propone el script `"test": "jest --watchAll"`, que se queda esperando: para comprobar tú, ejecuta `npx jest` (una pasada y termina).
 - Si pide un permiso (cámara, ubicación, notificaciones, fotos): pídelo **en el momento en que se usa**, nunca al abrir la app; texto concreto del porqué en el *config plugin* del módulo; alternativa si dice que no. Desactiva en el plugin los permisos que no uses (ver trampas).
 - Datos nuevos → actualiza `plan/PRIVACIDAD.md`.
 
@@ -41,7 +41,7 @@ Para cada librería o API que vayas a usar:
 ```bash
 npx tsc --noEmit
 npx expo-doctor          # si cambiaron dependencias o app.json
-npm test                 # si hay tests
+npx jest                 # si hay tests (una pasada)
 ```
 Después, ella repasa **cada criterio de «hecho»** en su móvil (y en la otra plataforma si la tiene). Pide confirmación explícita de cada uno. Si algo falla → `movil-arreglar`.
 

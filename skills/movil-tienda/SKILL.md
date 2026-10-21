@@ -7,11 +7,14 @@ description: Prepara una app móvil para App Store y Google Play - cuentas de de
 
 > **Archivos compartidos**: `REGLAS.md`, `plantillas/` y `referencias/` están en la skill `movil`, carpeta hermana de esta (`../movil/`). Si no la encuentras ahí, búscala en `~/.claude/skills/movil/` o en `~/.claude/plugins/` (`**/movil/REGLAS.md`). Si en el proyecto no existe `plan/ESTADO.md`, propón empezar por la skill `movil`.
 
-Lee `REGLAS.md` y `referencias/tiendas.md` de la skill `movil`, `plan/PRIVACIDAD.md` y `plan/ALCANCE.md`. Copia `plantillas/CHECKLIST_TIENDAS.md` a `plan/CHECKLIST_TIENDAS.md` y ve marcando. Comprueba los requisitos actuales en la ayuda oficial de App Store Connect y de Play Console antes de dar tamaños o límites.
+Lee `REGLAS.md` y `referencias/tiendas.md` de la skill `movil`, `plan/PRIVACIDAD.md` y `plan/ALCANCE.md`. Copia `plantillas/CHECKLIST_TIENDAS.md` a `plan/CHECKLIST_TIENDAS.md` y ve marcando. Comprueba los requisitos actuales en la ayuda oficial de App Store Connect y de Play Console antes de dar tamaños o límites, empezando por `referencias/tiendas.md` → «Requisitos con fecha».
 
 ## Orden (de lo que más tarda a lo que menos)
 
 ### 1. Cuentas (empieza ya: tardan días)
+
+Si H0.5 está hecho, las cuentas y la app en las dos consolas ya existen: revisa solo lo que falte de este punto (acuerdos, DSA).
+
 - **Apple Developer Program** (99 €/año): https://developer.apple.com/programs/enroll/. Como persona: tu nombre real saldrá como vendedor. Como empresa: necesita número D-U-N-S.
 - **Google Play Console** (25 $ una vez): https://play.google.com/console/signup. Verificación de identidad y de un móvil Android. **Cuenta personal nueva → prueba cerrada obligatoria** (punto 6).
 - **Acuerdos y datos fiscales/bancarios**: solo obligatorios si cobra (app de pago o compras integradas). Si es gratis, no hacen falta para publicar.
@@ -20,7 +23,7 @@ Lee `REGLAS.md` y `referencias/tiendas.md` de la skill `movil`, `plan/PRIVACIDAD
 ### 2. Nombre e identidad
 - Comprueba que el nombre está libre en las dos tiendas (y el dominio si quiere web). Si App Store Connect añade un sufijo raro al nombre, está cogido.
 - Nombre de tienda (30 caracteres) ≠ nombre bajo el icono (corto). Patrón útil: «Marca: qué hace» (p. ej. «Brotes: diario de plantas»).
-- Crea la app en App Store Connect y en Play Console con el bundle id / package de `app.json` (no se pueden cambiar después).
+- Crea la app en App Store Connect y en Play Console con el bundle id / package de `app.json` (no se pueden cambiar después), si no se creó ya en H0.5.
 
 ### 3. Web de privacidad y soporte
 - Rellena `plantillas/POLITICA_PRIVACIDAD.md` desde `plan/PRIVACIDAD.md`. Avísale de que es orientativa, no asesoramiento legal.

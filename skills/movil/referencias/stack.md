@@ -1,5 +1,7 @@
 # Stack recomendado
 
+_Verificado 2026-10: comprueba en la doc de Expo que cada recomendación sigue vigente._
+
 Lo que hemos usado en varias apps publicadas con Expo. **Las versiones las fija el SDK**: instala siempre con `npx expo install` y consulta la doc de la versión del proyecto.
 
 ## Base (siempre)
@@ -11,7 +13,8 @@ Lo que hemos usado en varias apps publicadas con Expo. **Las versiones las fija 
 | Builds y tiendas | **EAS Build / Submit / Update** | Compila en la nube (iOS desde Windows), gestiona certificados, sube a las tiendas, actualizaciones al momento |
 | Desarrollo | **Expo Go** al principio → **expo-dev-client** en cuanto haya algo nativo | |
 | Calidad | `tsc --noEmit`, `expo-doctor`, `eslint-config-expo` (`npx expo lint`) | |
-| Tests de lógica | **Vitest** o `node --test` sobre funciones puras | Rápidos, sin móvil |
+| Tests | **jest-expo** (el preset oficial de Jest para Expo) sobre funciones puras y, si hace falta, componentes | Rápidos, sin móvil; guía: https://docs.expo.dev/develop/unit-testing/ |
+| Datos | **En el móvil por defecto**: `expo-sqlite` (datos con estructura, listas, búsquedas) o AsyncStorage (preferencias y poca cosa); `expo-secure-store` para tokens | Sin servidor: más simple, más privado, más fácil de aprobar. Guía: https://docs.expo.dev/develop/user-interface/store-data/ |
 
 ## SDK de Expo (preferir siempre a alternativas)
 
@@ -50,7 +53,7 @@ Lo que hemos usado en varias apps publicadas con Expo. **Las versiones las fija 
 | Áreas seguras | `react-native-safe-area-context` | |
 | Estilos tipo Tailwind (opcional) | `nativewind` | Útil, pero tiene trampas (ver `trampas.md`). Si la persona no lo necesita, `StyleSheet` basta |
 | Componentes base (opcional) | react-native-reusables (estilo shadcn para RN) | shadcn/ui de web **no** sirve en nativo |
-| Backend | `@supabase/supabase-js` + `react-native-url-polyfill` | Ver `movil-backend` |
+| Backend (solo si hace falta) | `@supabase/supabase-js` + `react-native-url-polyfill` | Solo con cuentas, sincronización entre dispositivos o datos compartidos, justificado en `REQUISITOS.md`. Ver `movil-backend` |
 | Login con Google | `@react-native-google-signin/google-signin` | Necesita development build y 3 tipos de cliente OAuth |
 | Mapas | `react-native-maps` (sencillo) · `@maplibre/maplibre-react-native` (gratuito, estilos propios) · `@rnmapbox/maps` | Los dos últimos necesitan development build |
 | Widgets | iOS: `@bacons/apple-targets` · Android: `react-native-android-widget` | Avanzado; development build |

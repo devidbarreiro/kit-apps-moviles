@@ -25,6 +25,17 @@ _Actualizado: AAAA-MM-DD_
 | GitHub | | | gratis, repo privado |
 | Backend (p. ej. Supabase) | | | plan gratuito al inicio |
 
+## SDK y Expo Go
+- SDK de Expo fijado: <!-- p. ej. 57 (el de `expo` en package.json) --> …
+- Cómo probará en el móvil: Expo Go / development build / simulador
+- ¿Qué SDK abre hoy la Expo Go de la tienda?: … (comprobado el AAAA-MM-DD)
+- Cuándo piensa pagar Apple Developer: ahora / al terminar el MVP / no va a iOS
+- Riesgo aceptado: <!-- p. ej. «Windows + iPhone sin pagar: si sale un SDK nuevo, actualizar el proyecto o pagar» -->
+
+## Testers
+- Personas con Android para la prueba cerrada de Google (~15): …
+- Personas con iPhone para TestFlight: …
+
 ## Presupuesto
 - Para cuentas de tienda: …
 - Mensual para servicios (backend, builds, dominio…): …

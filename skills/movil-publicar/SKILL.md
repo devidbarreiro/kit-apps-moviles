@@ -12,7 +12,7 @@ Lee `REGLAS.md` y `referencias/tiendas.md` de la skill `movil`, `plan/CHECKLIST_
 ## 1. Antes de enviar
 
 - [ ] `plan/CHECKLIST_TIENDAS.md` completo (si falta algo, vuelve a `movil-tienda`).
-- [ ] `npx tsc --noEmit`, `npx expo-doctor`, tests: limpios.
+- [ ] `npx tsc --noEmit`, `npx expo-doctor` y `npx jest` (si hay tests): limpios.
 - [ ] `version` en `app.json` correcta (1.0.0 la primera). El número de build lo sube EAS.
 - [ ] Probado el build de **producción** en un móvil real de cada plataforma.
 - [ ] Backend despierto y en producción; cuenta demo funciona.

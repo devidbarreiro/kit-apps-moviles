@@ -9,6 +9,21 @@ description: Diagnostica y arregla errores de una app Expo/React Native con mét
 
 Lee `REGLAS.md` y `referencias/trampas.md` de la skill `movil`.
 
+## Primero, tranquilidad (díselo con estas palabras o parecidas)
+
+> Los errores son normales; casi todos tienen arreglo y nada de lo que hemos guardado se pierde. Vamos a mirarlo con calma.
+
+**Qué necesitas de ella:**
+1. **El error entero, copiado y pegado** en el chat (no un resumen ni «me sale un error»). En la terminal: selecciona desde la primera línea roja hasta el final y copia (Mac: ⌘C; Windows Terminal: Ctrl+Mayús+C). En el móvil (pantalla roja): una captura. En un build de EAS: el enlace del build en expo.dev.
+2. **Qué estaba haciendo** justo antes y si ha pasado más veces.
+3. Que **borre del texto** contraseñas, claves o correos antes de pegarlo.
+
+**Cuándo parar y pedir ayuda a una persona** (díselo tal cual si ocurre): si tras dos intentos el error sigue igual; si el arreglo pide pagar, borrar datos de usuarios, tocar la cuenta de Apple o Google, o cambiar algo fuera de la carpeta del proyecto; o si ella ya no entiende lo que está pasando. Puede abrir un *issue* en el repositorio del kit con la plantilla «Algo no funciona».
+
+**Volver atrás sin romper nada** (si el cambio que lo rompió aún no está guardado): `git stash` aparta los cambios y deja la app como en el último punto de guardado (se recuperan con `git stash pop`). Si ya estaba guardado: `git log --oneline` para ver los puntos y `git revert <id>` para deshacer uno. Nada de `git reset --hard` sin su «sí» (ver `REGLAS.md` §6).
+
+**Retomar otro día**: antes de cerrar, apunta en `plan/ESTADO.md` → «Bloqueos y esperas» el error, lo probado y la siguiente idea. Al volver, `/movil` lo leerá.
+
 ## Método
 
 1. **Captura el error completo.** Pide una captura o el texto exacto (de la terminal de Metro, de la pantalla roja o del log de EAS en expo.dev). Si es un build de EAS, abre el log del paso que falla, no solo el resumen.
@@ -16,7 +31,8 @@ Lee `REGLAS.md` y `referencias/trampas.md` de la skill `movil`.
 3. **Mira `referencias/trampas.md`**: muchos errores ya los hemos visto.
 4. **Busca en la documentación oficial** y en los *issues* de GitHub de la librería implicada, con el mensaje de error exacto y la versión del SDK.
 5. **Una hipótesis cada vez.** Cambia una sola cosa, prueba, y si no era eso, deshazla.
-6. **Arreglado = comprobado en el móvil.** Después, commit `arregla: <qué>` y, si es una trampa nueva, añádela a `plan/ESTADO.md` → «Decisiones» para no repetirla.
+6. **Arreglado = comprobado en el móvil**, con evidencia (la salida limpia del comando, el build en verde, o lo que ella confirma ver en el móvil). Después, commit `arregla: <qué>` y, si es una trampa nueva, añádela a `plan/ESTADO.md` → «Decisiones» para no repetirla.
+7. **Si era una trampa que el kit no conocía**, propónle abrir un *issue* en el repositorio del kit con la plantilla «Trampa nueva» (síntoma, error exacto sin datos personales, arreglo y versión del SDK). Redáctaselo tú para que solo tenga que pegarlo. Así llega a la siguiente persona.
 
 ## Primeros auxilios (en este orden)
 
@@ -47,4 +63,5 @@ Si nada: borra `node_modules` y reinstala (`rm -rf node_modules && npm install`;
 - Nunca «arregles» desactivando la comprobación (TypeScript `any`, `// @ts-ignore`, quitar una regla de RLS, borrar un test) sin decirlo y sin su permiso.
 - No toques `ios/` ni `android/` a mano: se regeneran con `npx expo prebuild`. Los cambios nativos van en `app.json` o en un *config plugin*.
 - No parchees librerías de Expo (patch-package) salvo como último recurso, documentado y con fecha para quitarlo.
-- Si tras dos intentos no está claro, para y explícale la situación con opciones.
+- Si tras dos intentos no está claro, para y explícale la situación con opciones (ver «Cuándo parar»).
+- Nunca inventes comandos ni opciones para «probar a ver»: compruébalos con `--help` o en la doc.

@@ -19,6 +19,33 @@ Lee `REGLAS.md` de la skill `movil`. Plantilla: `plantillas/PERFIL.md` de la ski
 4. **Cuentas**: ¿Tiene ya cuenta de Apple Developer, Google Play Console, Expo y GitHub? ¿Las abrirá como **persona** o como **empresa**?
 5. **Presupuesto**: ¿Puede pagar 99 €/año (Apple) y 25 $ una vez (Google)? ¿Algo al mes para servicios?
 6. **Experiencia y tiempo**: ¿Ha hecho algo técnico antes? ¿Cuántas horas a la semana? ¿Hay fecha objetivo?
+7. **Testers de Android**: si quiere Google Play con cuenta personal nueva, ¿conoce a unas **15 personas con móvil Android** dispuestas a instalar una versión de prueba y no borrarla en dos semanas? (Google pide 12 durante 14 días; se piden 15 porque alguno se cae.)
+
+## Decisiones tempranas (tómalas aquí, con ella)
+
+### A. Expo Go o pagar Apple pronto
+
+Expo Go es la app gratuita que abre tu proyecto en el móvil escaneando un QR. Tiene una trampa: **la Expo Go de las tiendas solo abre proyectos del SDK de Expo más reciente**. Cuando Expo saca un SDK nuevo (varias veces al año), la Expo Go del móvil se actualiza y deja de abrir el proyecto hasta que lo actualices también. En Android se puede instalar una Expo Go antigua; **en iPhone no** (Apple no permite instalar versiones viejas).
+
+Comprueba hoy qué SDK abre la Expo Go de la tienda (https://expo.dev/go y el *changelog* de https://expo.dev/changelog) y explícale su caso:
+
+| Su caso | Qué significa | Recomendación |
+|---|---|---|
+| **Windows (o Mac sin Xcode) + iPhone, sin pagar los 99 €** | Solo puede probar con Expo Go. Si sale un SDK nuevo a mitad del proyecto, tendrá que actualizar el proyecto (a veces rompe cosas) o pagar Apple para pasar a *development build*. | Aceptable para empezar si el MVP no tiene nada nativo (ver `movil-alcance`). Avisa ya de que antes de publicar pagará igualmente. |
+| **Android** | Expo Go o un *development build* (APK) gratis, sin restricciones. | Sin problema. |
+| **Mac con Xcode** | El simulador de iPhone abre cualquier SDK; puede trabajar sin pagar hasta publicar. | Sin problema si tiene espacio para Xcode. |
+| **Va a pagar Apple pronto** | *Development build* en su iPhone desde el principio; las actualizaciones de Expo Go dejan de importar. | La opción más tranquila si el MVP tiene algo nativo. |
+
+Apunta en `plan/PERFIL.md` → «SDK y Expo Go»: el **SDK fijado** (el de `expo` en `package.json`), cómo probará (Expo Go / development build / simulador) y cuándo piensa pagar Apple. No cambies de SDK sin decidirlo con ella.
+
+### B. ¿Qué tienda primero?
+
+- Si quiere Android con **cuenta personal nueva** y **no tiene ~15 personas con Android** para la prueba cerrada, recomienda **publicar primero en iOS** y preparar Android en paralelo (la prueba cerrada se puede abrir más tarde).
+- Si solo tiene un tipo de móvil, la primera tienda suele ser la de su móvil.
+
+### C. Persona o empresa
+
+Por defecto, **persona** (más rápido; no pide D-U-N-S). Empresa solo si ya existe legalmente y quiere que salga su nombre como vendedor. En la UE, las dos tiendas preguntan si es **comerciante** (DSA): si la app es gratis y sin actividad comercial, normalmente «no comerciante»; si cobra o es parte de su negocio, «comerciante» (su dirección y teléfono se verán en la ficha). Esto no es asesoramiento legal: que lo confirme en la ayuda de cada tienda (`referencias/tiendas.md`).
 
 ## Qué deducir (y explicárselo)
 
@@ -30,13 +57,14 @@ Lee `REGLAS.md` de la skill `movil`. Plantilla: `plantillas/PERFIL.md` de la ski
 | **Sin Android** | Igual: un emulador sirve para desarrollar, pero la prueba cerrada de Google exige testers reales. |
 | **Cuenta personal nueva de Google Play** | Antes de publicar: **prueba cerrada con al menos 12 testers durante 14 días seguidos**. Hay que tener los 12 contactos pensados desde ya. Con cuenta de **empresa** no se exige, pero pide número D-U-N-S (gratis, tarda días o semanas). |
 | **Cuenta de Apple como empresa** | Pide D-U-N-S y que la empresa exista legalmente. Como persona, en la tienda sale su nombre real como vendedor. |
-| **Sin presupuesto para Apple** | Puede desarrollar y probar con Expo Go gratis; los 99 € solo hacen falta para TestFlight, development builds en iPhone y publicar. Decide cuándo pagarlos (no antes de tener el MVP usable). |
+| **Sin presupuesto para Apple** | Puede desarrollar y probar con Expo Go gratis; los 99 € solo hacen falta para TestFlight, development builds en iPhone y publicar. Ojo con la trampa de Expo Go (decisión A) y con las funciones nativas del MVP (`movil-alcance`), que adelantan el pago. |
 | **Poco tiempo** | MVP más pequeño y hitos de una semana. |
 
-Costes de referencia (comprueba los actuales en las webs oficiales y díselo):
-- Apple Developer Program: 99 €/año (https://developer.apple.com/programs/).
-- Google Play Console: 25 $ pago único (https://play.google.com/console/signup).
-- Expo / EAS: plan gratuito con un cupo mensual de builds en la nube; suficiente para empezar (https://expo.dev/pricing).
+Costes de referencia (verificados 2026-10; comprueba los actuales en `referencias/tiendas.md` → «Requisitos con fecha» y díselo):
+- Apple Developer Program: 99 USD/año, en euros según el país al darse de alta (https://developer.apple.com/programs/enroll/).
+- Google Play Console: 25 USD, pago único (https://support.google.com/googleplay/android-developer/answer/6112435).
+- Expo / EAS: plan gratuito con 15 builds de Android y 15 de iOS al mes, en cola de baja prioridad (https://expo.dev/pricing).
+- Claude: Claude Code necesita un plan de pago (Pro o superior) (https://claude.com/pricing).
 - Backend (p. ej. Supabase): plan gratuito para empezar; ojo, los proyectos gratuitos se **pausan tras unos días sin uso** (https://supabase.com/pricing).
 - Dominio para la web de privacidad/soporte: opcional (se puede usar una web estática gratuita).
 
@@ -44,6 +72,6 @@ Costes de referencia (comprueba los actuales en las webs oficiales y díselo):
 
 1. `plan/PERFIL.md` rellenado, con la sección «Consecuencias para el plan».
 2. Lista corta de **cuentas a abrir ya** (las verificaciones tardan días): Expo (gratis, ahora), GitHub (gratis, ahora), Google Play y Apple cuando decida pagar. No las abras tú: dale el enlace y qué elegir.
-3. `plan/ESTADO.md`: fase → «idea», decisiones tomadas (plataformas, persona/empresa).
+3. `plan/ESTADO.md`: fase → «idea», decisiones tomadas (plataformas y cuál primero, persona/empresa, SDK fijado, Expo Go o development build, cuándo pagar Apple).
 4. Commit: `plan: perfil inicial`.
 5. Siguiente: **movil-idea**.

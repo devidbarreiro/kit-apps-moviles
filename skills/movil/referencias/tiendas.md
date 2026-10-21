@@ -2,13 +2,36 @@
 
 Cifras y límites cambian: compruébalos en la ayuda oficial de App Store Connect y Play Console antes de dárselos a la persona.
 
+## Requisitos con fecha (verificado 2026-10)
+
+> **Para Claude:** cada fila se comprobó en su fuente oficial en octubre de 2026. **Antes de usar una cifra con la persona, vuelve a abrir su URL** (WebFetch) y compárala. Si ha cambiado, usa la nueva, díselo («el kit decía X; hoy la web oficial dice Y») y anótalo en `plan/ESTADO.md` → «Decisiones». Lo marcado «sin verificar» no se pudo confirmar: no lo des como seguro.
+
+| Requisito | Valor (2026-10) | Fuente oficial |
+|---|---|---|
+| Apple Developer Program | 99 USD por año de membresía; el precio en tu moneda aparece al darte de alta | https://developer.apple.com/programs/enroll/ |
+| Google Play Console | 25 USD, pago único | https://support.google.com/googleplay/android-developer/answer/6112435 |
+| Google Play: API objetivo (`targetSdk`) | Desde el 31-08-2026, apps nuevas y actualizaciones deben apuntar a **Android 16 (API 36)** o superior (prórroga posible hasta el 01-11-2026). Las apps ya publicadas que apunten a API 34 o menos dejan de verse para usuarios nuevos con Android más nuevo | https://developer.android.com/google/play/requirements/target-sdk |
+| Qué API objetivo trae cada SDK de Expo | **Sin verificar** en el kit. Compruébalo en el *changelog* del SDK del proyecto o con `npx expo config --type introspect` antes del primer envío | https://expo.dev/changelog |
+| Apple: versión de Xcode | Desde el 28-04-2026, todo lo que se sube a App Store Connect debe compilarse con **Xcode 26 o posterior y el SDK de iOS 26**. EAS Build en la nube usa una imagen compatible; en local, comprueba tu Xcode | https://developer.apple.com/news/upcoming-requirements/ |
+| Apple: versión mínima de iOS | Desde el 09-09-2026, las apps deben apuntar a iOS 13 o posterior (Expo ya pide una versión mayor) | https://developer.apple.com/news/upcoming-requirements/ |
+| Apple: clasificación por edades | Nuevas categorías **4+, 9+, 13+, 16+ y 18+**; desde el 31-01-2026 hay que responder el cuestionario nuevo para poder enviar actualizaciones | https://developer.apple.com/help/app-store-connect/reference/app-information/age-ratings-values-and-definitions/ |
+| Google: prueba cerrada (cuentas personales creadas después del 13-11-2023) | **12 testers** inscritos **14 días seguidos** como mínimo; quien se sale antes de 14 días no cuenta | https://support.google.com/googleplay/android-developer/answer/14151465 |
+| EAS (Expo), plan gratuito | **15 builds de Android y 15 de iOS al mes**, cola de baja prioridad (en horas punta, esperas de 90 minutos o más); EAS Update hasta 1.000 usuarios activos al mes. Plan Starter: 19 USD/mes más uso | https://expo.dev/pricing |
+| Expo Go | La Expo Go de las tiendas solo abre el **SDK más reciente**; en un iPhone no se puede instalar una versión antigua. En los cambios de SDK, `create-expo-app` sin `--template` crea el proyecto con el SDK que abre Expo Go | https://docs.expo.dev/more/create-expo/ · https://expo.dev/changelog |
+| Tiempos de revisión | Apple: al menos el 50 % en menos de 24 h y el 90 % en menos de 48 h. Google: algunas cuentas (las nuevas suelen estarlo) pasan una revisión ampliada de hasta 7 días o más | https://developer.apple.com/distribute/app-review/ · https://support.google.com/googleplay/android-developer/answer/9859751 |
+| UE, Ley de Servicios Digitales (DSA) | Apple pide declarar si eres comerciante al enviar una app nueva; si no lo eres, la ficha avisa a los usuarios de la UE de que no aplican sus derechos de consumidor. Si lo eres, tu dirección, teléfono y correo se muestran en la ficha | https://developer.apple.com/help/app-store-connect/manage-compliance-information/manage-european-union-digital-services-act-trader-requirements/ |
+| Google Play y DSA | **Sin verificar** en esta revisión (Play Console también pide el estado de comerciante; consulta su ayuda) | https://support.google.com/googleplay/android-developer/ |
+| Claude (para usar el kit) | Claude Code va incluido en los planes de pago; Pro: 20 USD/mes (17 USD/mes pagando el año). Límite por sesión que se reinicia cada 5 horas y otro semanal, compartidos con el chat | https://claude.com/pricing · https://support.claude.com/en/articles/11145838-use-claude-code-with-your-pro-or-max-plan |
+| Comisión de las tiendas (15 % / 30 %) | **Sin verificar** en esta revisión | Ayuda de App Store Connect y Play Console |
+| Supabase: plazo de pausa de proyectos gratuitos | **Sin verificar** en esta revisión | https://supabase.com/pricing |
+
 ## Cuentas y costes
 
 | Cosa | Coste | Notas |
 |---|---|---|
-| Apple Developer Program | 99 €/año | Sin él: ni TestFlight, ni development build en iPhone, ni publicar. Si no se renueva, la app desaparece de la tienda. |
-| Google Play Console | 25 $ una vez | Verificación de identidad y de un móvil Android. |
-| EAS (Expo) | Gratis con cupo mensual | El cupo de iOS se agota pronto; `eas build --local` (Mac) no lo gasta. |
+| Apple Developer Program | 99 USD/año (precio local al darte de alta) | Sin él: ni TestFlight, ni development build en iPhone, ni publicar. Si no se renueva, la app desaparece de la tienda. |
+| Google Play Console | 25 USD una vez | Verificación de identidad y de un móvil Android. |
+| EAS (Expo) | Gratis con cupo mensual (15 + 15, ver arriba) | El cupo de iOS se agota pronto; `eas build --local` (Mac) no lo gasta. |
 | Backend (Supabase) | Gratis para empezar | Se pausa sin actividad; para una app publicada, valora el plan de pago. |
 | Web de privacidad/soporte | 0 € | GitHub Pages, Vercel, Cloudflare Pages… |
 | Comisión de las tiendas | 15 % (programas para pequeños desarrolladores) / 30 % | Solo si cobras por contenido digital. |
@@ -22,12 +45,13 @@ Cifras y límites cambian: compruébalos en la ayuda oficial de App Store Connec
 
 ## Flujo que nos funciona
 
-1. Development build pronto (antes del primer módulo nativo).
-2. TestFlight interno y prueba interna de Google en cuanto el MVP se usa de punta a punta.
-3. Ficha + «Contenido de la app» completos → prueba cerrada de Google (14 días) en paralelo a los últimos arreglos.
-4. Revisión de Apple con **publicación manual**.
-5. Mientras está en revisión: congelar funcionalidades.
-6. Después, arreglos de JS por EAS Update; cambios nativos con versión nueva.
+1. App en blanco en TestFlight y en la prueba interna de Google (hito H0.5) antes de programar funciones.
+2. Development build pronto (antes del primer módulo nativo).
+3. TestFlight interno y prueba interna de Google con builds reales en cuanto el MVP se usa de punta a punta.
+4. Ficha + «Contenido de la app» completos → prueba cerrada de Google (14 días) en paralelo a los últimos arreglos.
+5. Revisión de Apple con **publicación manual**.
+6. Mientras está en revisión: congelar funcionalidades.
+7. Después, arreglos de JS por EAS Update; cambios nativos con versión nueva.
 
 Tiempos vistos: Apple suele contestar en 1-2 días (la primera vez, más). Del primer build en TestFlight a la 1.0 publicada: de días a unas semanas. Una app con varios rechazos tardó cinco semanas. Google: la primera revisión de la prueba cerrada y la solicitud de producción, varios días cada una.
 

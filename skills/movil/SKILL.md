@@ -27,7 +27,35 @@ Explica en 4-5 líneas cómo va a ir esto:
 
 > Vamos a hacerlo por fases, como una obra: primero planos (qué app, para quién, qué entra en la primera versión), luego cimientos (instalar herramientas y crear el proyecto), después la construcción por hitos pequeños que vas probando en tu móvil, y al final la publicación en las tiendas. Todo queda apuntado en una carpeta `plan/`, así que podemos parar y seguir otro día.
 
-Pregunta el nombre provisional de la app y dónde guardarla (propón `~/apps/<nombre-en-minusculas>` en Mac o `C:\apps\<nombre-en-minusculas>` en Windows: sin espacios ni tildes). Crea la carpeta y `plan/`, inicializa git (`git init`) y copia `plantillas/ESTADO.md` a `plan/ESTADO.md` con la fase «entrevista». Continúa con **movil-entrevista**.
+Después, en este orden (primero el proyecto Expo, después el plan dentro; así no hay que mover nada):
+
+1. **Nombre de la carpeta**: pregunta el nombre de la app y propón uno para la carpeta en minúsculas, sin espacios ni tildes, con guiones si hacen falta (p. ej. `diario-plantas`). De ahí salen el `slug` y el nombre interno del proyecto; el nombre que verán los usuarios se pone después.
+2. **Herramientas mínimas**: comprueba `node -v` y `git --version`. Si falta alguno, haz primero el paso «1. Herramientas» de la skill `movil-preparar` y vuelve aquí.
+3. **Crea el proyecto Expo** dentro de la carpeta de apps (lo ejecutas tú; tarda uno o dos minutos y descarga paquetes). Dile antes qué va a pasar: «voy a crear el proyecto; verás muchas líneas y al final algo como *Your project is ready!*».
+
+   Mac (Terminal):
+   ```bash
+   mkdir -p ~/apps
+   cd ~/apps
+   npx create-expo-app@latest diario-plantas --yes
+   cd diario-plantas
+   ```
+   Windows (PowerShell):
+   ```powershell
+   New-Item -ItemType Directory -Force C:\apps
+   cd C:\apps
+   npx create-expo-app@latest diario-plantas --yes
+   cd diario-plantas
+   ```
+   `--yes` usa las opciones por defecto sin hacer preguntas (tu terminal no puede responderlas). Si aun así `npx` pregunta «Need to install the following packages… Ok to proceed?», pídele a ella que lo ejecute en su terminal y responda `y`. Sin `--template`, `create-expo-app` crea el proyecto con el SDK que abre la Expo Go de las tiendas (así lo indica https://docs.expo.dev/more/create-expo/ durante los cambios de SDK): es lo que queremos para empezar. El SDK se fija en la entrevista. La plantilla puede crear también `AGENTS.md` y `.claude/settings.json`: déjalos.
+4. **Crea el plan y el historial dentro del proyecto**:
+   ```bash
+   mkdir plan
+   git status
+   ```
+   Si `git status` dice que no es un repositorio (`not a git repository`), ejecuta `git init`. Si responde con normalidad, `create-expo-app` ya lo creó: no hagas nada más.
+5. Copia `plantillas/ESTADO.md` a `plan/ESTADO.md` con la fase «entrevista» y la ruta del proyecto. Commit: `plan: empezamos`.
+6. Dile que, a partir de ahora, Claude Code se abre **dentro de la carpeta de la app** (`cd ~/apps/diario-plantas` y `claude` en Mac; `cd C:\apps\diario-plantas` y `claude` en Windows). Continúa con **movil-entrevista**.
 
 ### 3. Proyecto existente: resumen y siguiente paso
 
@@ -50,7 +78,8 @@ Pregunta si sigue por ahí o quiere hacer otra cosa.
 | No hay `REQUISITOS.md` | `movil-idea` |
 | No hay `ALCANCE.md` | `movil-alcance` |
 | No hay `HOJA_DE_RUTA.md` | `movil-hitos` |
-| H0 sin terminar (no hay `package.json` de Expo o no abre en el móvil) | `movil-preparar` |
+| H0 sin terminar (la app en blanco no abre en el móvil, falta `eas.json` o configuración) | `movil-preparar` |
+| H0.5 sin terminar (la app en blanco no está aún en TestFlight / prueba interna de Google) | `movil-probar` (sección H0.5) |
 | El hito actual necesita base de datos, cuentas o sincronizar entre móviles y no hay backend | `movil-backend` |
 | Hay un hito H1…Hn pendiente | `movil-hito` |
 | Toca HP (prueba real), o hace falta un development build | `movil-probar` |
@@ -70,7 +99,7 @@ Si la persona pide algo fuera de orden (p. ej. «quiero publicar ya» sin hitos)
 ## Mapa del kit
 
 ```
-movil ─► entrevista ─► idea ─► alcance ─► hitos ─► preparar ─┬─► hito (×N) ─► probar ─► tienda ─► publicar ─► actualizar
-                                                             └─► backend (si hace falta)
+movil ─► entrevista ─► idea ─► alcance ─► hitos ─► preparar (H0) ─► probar (H0.5: app en blanco en la tienda) ─┬─► hito (×N) ─► probar (HP) ─► tienda ─► publicar ─► actualizar
+                                                                                                              └─► backend (solo si hace falta)
                                    arreglar: en cualquier momento
 ```

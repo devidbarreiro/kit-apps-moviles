@@ -1,6 +1,6 @@
 ---
 name: movil-probar
-description: Lleva una app Expo del ordenador al móvil de verdad - Expo Go frente a development build, builds en la nube con EAS (también desde Windows para iPhone), instalar en iPhone (TestFlight o dispositivo registrado) y en Android (APK o prueba interna de Google Play), y una prueba real con otras personas. Úsala cuando digan "quiero probarla en mi móvil", "no funciona en Expo Go", "development build", "TestFlight", "pásasela a un amigo", "hacer un build", o `/movil-probar`.
+description: Lleva una app Expo del ordenador al móvil de verdad - el hito H0.5 (la app en blanco en TestFlight y en la prueba interna de Google antes de programar), Expo Go frente a development build, builds en la nube con EAS (también desde Windows para iPhone), instalar en iPhone (TestFlight o dispositivo registrado) y en Android (APK o prueba interna de Google Play), y una prueba real con otras personas. Úsala cuando digan "quiero probarla en mi móvil", "no funciona en Expo Go", "development build", "TestFlight", "pásasela a un amigo", "hacer un build", "H0.5", "app en blanco en la tienda", o `/movil-probar`.
 ---
 
 # movil-probar
@@ -20,6 +20,25 @@ Explícaselas así:
 | **Build de producción** | La app final, como la bajaría un usuario | Prueba real, TestFlight, tiendas | Igual |
 
 Regla: cuando una librería diga que necesita *config plugin* o «no disponible en Expo Go», toca development build. Mejor pronto que tarde: es donde salen los problemas nativos.
+
+## H0.5 · App en blanco en la tienda
+
+Se hace justo después de H0, **antes de programar funciones**. Objetivo: que la app vacía llegue a TestFlight y a la prueba interna de Google. Así salen pronto los problemas de cuentas, certificados, firma y nombres, cuando no hay nada que romper. Requisitos: H0 hecho, cuentas de Apple y/o Google **pagadas y verificadas** (la verificación tarda días: si aún no está, anótalo en «Bloqueos y esperas» y sigue con H1).
+
+1. **Comprobaciones**: `app.json` con nombre, `slug`, bundle id / package **definitivos**, `version: "1.0.0"`; `eas.json` con el perfil `production`; `npx expo-doctor` limpio.
+2. **iPhone** (lo ejecuta ella en su segunda terminal; es interactivo la primera vez):
+   ```bash
+   eas build --platform ios --profile production
+   eas submit --platform ios --latest
+   ```
+   EAS le pedirá iniciar sesión con su Apple ID y crear certificados: que acepte que EAS los gestione. Si la app no existe aún en App Store Connect, `eas submit` ofrece crearla (compruébalo en https://docs.expo.dev/submit/ios/). Cuando Apple termine de procesarla (de minutos a una hora), en App Store Connect → TestFlight añade su Apple ID como **probador interno** e instálala con la app TestFlight.
+3. **Android**:
+   ```bash
+   eas build --platform android --profile production
+   ```
+   Da un archivo **AAB**. Ella crea la app en Play Console y, en **Pruebas → Prueba interna**, crea una versión y **sube ese primer AAB a mano** (descárgalo desde el enlace del build en expo.dev). Se añade como tester con su cuenta de Google, abre el enlace de inscripción en el móvil e instala desde Play. Deja que EAS genere la *keystore* (la llave que firma la app) y **guarda una copia** en un gestor de contraseñas.
+4. **Hecho cuando** ella abre la app en blanco instalada desde TestFlight y/o desde Google Play. Enseña la evidencia: el build «finished» en expo.dev, el estado en TestFlight o en la prueba interna, y lo que ve en el móvil.
+5. Si algo falla, `movil-arreglar`. Apunta en `plan/ESTADO.md` el bundle id, el `ascAppId` si EAS lo muestra, y que H0.5 está hecho. Commit: `H0.5: app en blanco en las tiendas`.
 
 ## Development build
 
@@ -42,6 +61,8 @@ El plan gratuito de EAS tiene un número limitado de builds en la nube al mes (c
 - En Mac con Xcode y espacio: `eas build --local` compila en tu ordenador sin gastar cupo (necesita fastlane y bastante disco).
 
 ## Build de prueba para otras personas
+
+Si H0.5 está hecho, las cuentas, los certificados y la app en las consolas ya existen: esto es repetir los mismos comandos con la versión nueva.
 
 **iPhone → TestFlight** (necesita Apple Developer y la app creada en App Store Connect):
 ```bash
@@ -67,5 +88,6 @@ eas submit --platform ios --latest
 
 ## Salida
 
-- `plan/ESTADO.md`: fase → «tiendas» cuando HP esté hecho; qué builds hay, en qué móviles se ha probado, problemas abiertos.
-- Siguiente: **movil-tienda**.
+- Tras **H0.5**: `plan/ESTADO.md` con H0.5 ✅ y siguiente → H1 con **movil-hito**.
+- Tras **HP**: `plan/ESTADO.md`: fase → «tiendas»; qué builds hay, en qué móviles se ha probado, problemas abiertos.
+  Siguiente: **movil-tienda**.

@@ -11,6 +11,19 @@ Estas reglas valen en **todas** las skills `movil-*`. Léelas una vez por sesió
 - Nunca le pidas que edite código a mano. Lo editas tú; ella prueba en el móvil y te cuenta qué ve.
 - Al terminar cada paso: qué ha cambiado, cómo comprobarlo y cuál es el siguiente paso.
 
+### Permisos de Claude Code
+
+Claude Code le pedirá permiso antes de ejecutar comandos o editar archivos. Para ella es nuevo: ayúdale a decidir.
+
+- **Antes de una acción que vaya a pedir permiso, di en una línea qué vas a hacer y por qué** («Voy a instalar expo-image con `npx expo install`; te pedirá permiso»).
+- Lo normal y tranquilo: leer archivos, editar archivos **dentro de la carpeta del proyecto**, y `npm`, `npx`, `expo`, `eas build`, `git add` / `git commit` dentro del proyecto.
+- Lo que debe hacerla parar y preguntarte (y tú debes señalarlo antes, con «⚠️ Esto…»): borrar archivos o carpetas, cualquier cosa que **pague**, **publique** o **envíe** (`eas submit`, `eas update --channel production`, `git push`), comandos que tocan **fuera de la carpeta del proyecto** (`sudo`, instalar programas, cambiar ajustes del sistema) y cualquier cosa que pida **contraseñas**.
+- Nunca le pidas que active el modo que aprueba todo automáticamente ni que cambie la configuración de permisos para «ir más rápido».
+
+### Límites de uso del plan
+
+El plan Pro tiene un límite por sesión (se reinicia cada 5 horas) y otro semanal, compartidos entre Claude y Claude Code. Para gastar menos: una tarea concreta cada vez, no pegues archivos enormes, y empieza una sesión nueva (`/clear`) al cambiar de hito, porque `plan/ESTADO.md` guarda el hilo. **Si quedan pocos pasos para un límite o la sesión se alarga**, actualiza `plan/ESTADO.md` con el siguiente paso exacto antes de seguir: si aparece el aviso de límite alcanzado, ella solo tendrá que esperar al reinicio y escribir `/movil`.
+
 ## 2. Documentación oficial primero
 
 Antes de escribir código o dar instrucciones de una librería, servicio o tienda, consulta la documentación oficial **actual**. Las versiones cambian cada pocos meses y tu memoria puede estar desfasada.
@@ -46,6 +59,7 @@ Antes de escribir código o dar instrucciones de una librería, servicio o tiend
 - Lleva desde el principio una lista de **qué datos recoge la app y para qué** en `plan/PRIVACIDAD.md`. Las tiendas la pedirán (etiquetas de privacidad de Apple, «Seguridad de los datos» de Google).
 - Si la app tiene cuentas, **borrar la cuenta desde la propia app** es obligatorio en ambas tiendas. Planéalo en el MVP.
 - Datos que escribe el usuario o que vienen de fuera son no fiables: valida antes de guardarlos.
+- **Sin backend por defecto.** Los datos se guardan en el móvil (`expo-sqlite` o AsyncStorage). Solo se monta un servidor (Supabase) si hay cuentas, sincronización entre dispositivos o datos compartidos entre personas, y queda justificado en `plan/REQUISITOS.md` (ver `movil-backend`).
 
 ## 5. Estado del proyecto (para retomar en otra sesión)
 
@@ -53,7 +67,7 @@ Todo el plan vive en la carpeta `plan/` del proyecto:
 
 | Archivo | Lo crea | Contenido |
 |---|---|---|
-| `plan/PERFIL.md` | `movil-entrevista` | Ordenador, móviles, presupuesto, cuentas, experiencia |
+| `plan/PERFIL.md` | `movil-entrevista` | Ordenador, móviles, presupuesto, cuentas, experiencia, SDK de Expo fijado y decisión sobre Expo Go |
 | `plan/REQUISITOS.md` | `movil-idea` | Idea, usuarios, problemas, requisitos con ID |
 | `plan/ALCANCE.md` | `movil-alcance` | Qué entra en el MVP y qué no |
 | `plan/HOJA_DE_RUTA.md` | `movil-hitos` | Hitos con objetivo, requisitos y criterios de «hecho» |
@@ -74,6 +88,7 @@ Reglas:
 
 - El proyecto vive en git desde el primer día. Haz un commit pequeño al terminar cada paso que funcione, con mensaje en castellano que diga qué cambia.
 - Explícale que un commit es «un punto de guardado al que podemos volver».
+- **Volver atrás sin romper nada.** Si un cambio sale mal y aún no está guardado, `git stash` lo aparta (se puede recuperar con `git stash pop`). Para ver los puntos de guardado: `git log --oneline`. Para deshacer un commit ya hecho, `git revert <id>` (crea un commit nuevo que lo deshace; no borra historia). **Nunca** uses `git reset --hard`, `git clean` ni `git push --force` sin explicarle qué se pierde y tener su «sí».
 - No subas nada a GitHub ni a ningún sitio sin que ella lo pida; si lo pide, repositorio **privado** por defecto.
 
 ## 7. Comprobar antes de decir «hecho»
@@ -83,8 +98,18 @@ Un paso no está hecho hasta que:
 2. `npx expo-doctor` no da errores (si se tocaron dependencias),
 3. ella lo ha visto funcionar **en su móvil** y te lo ha confirmado.
 
+**Evidencia antes de «listo».** No digas «listo», «hecho» ni «funciona» sin enseñar la prueba: la salida del comando (las últimas líneas que importan), el enlace o el estado del build en expo.dev, el log, o **qué tiene que mirar ella en el móvil** y qué debe ver exactamente. Si no lo has podido comprobar, dilo así: «no lo he podido comprobar porque…».
+
+**Dos atascos, parada.** Si fallas dos veces en lo mismo, no pruebes una tercera cosa a ciegas: para, explícale en llano qué pasa, qué has probado y qué opciones hay (incluida «pedir ayuda a una persona» o abrir un *issue* del kit).
+
+**Nunca inventes comandos ni opciones.** Si no estás seguro de que un comando o una opción existe, compruébalo antes con `--help` (p. ej. `npx eas-cli@latest build --help`) o en la documentación oficial. Lo mismo con nombres de ajustes de `app.json` o `eas.json`.
+
 Si algo falla, no adivines: lee el error completo, busca en la documentación oficial y consulta `referencias/trampas.md`.
 
 ## 8. Lo que no haces sin permiso explícito
 
-Pagar o contratar nada, crear cuentas por ella, enviar la app a revisión, publicar una versión, lanzar un `eas update` a producción, borrar datos de la base de datos de producción o subir código a un repositorio público.
+Pagar o contratar nada, crear cuentas por ella, enviar la app a revisión, publicar una versión, lanzar un `eas update` a producción, borrar datos de la base de datos de producción, borrar archivos fuera de lo que acabas de crear, tocar nada fuera de la carpeta del proyecto o subir código a un repositorio público.
+
+## 9. Aviso
+
+Lo que dices sobre tiendas, impuestos, privacidad o leyes es orientativo: **no es asesoramiento legal, fiscal ni profesional**, y los requisitos cambian. Dilo cuando toque (cuentas de empresa, comerciante en la UE, política de privacidad, cobrar) y remite a la fuente oficial.

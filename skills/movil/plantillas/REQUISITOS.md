@@ -30,6 +30,11 @@ _Actualizado: AAAA-MM-DD_
 | N03 | Plataformas | iOS / Android |
 | N04 | Accesibilidad | tamaño de letra del sistema, contraste |
 
+## ¿Hace falta servidor?
+<!-- Por defecto NO: los datos se guardan en el móvil. Solo «sí» si hay cuentas, sincronización entre dispositivos o datos compartidos entre personas. -->
+- Respuesta: no / sí
+- Por qué (requisito que lo exige): …
+
 ## Datos que maneja
 <!-- Alimenta plan/PRIVACIDAD.md -->
 - …

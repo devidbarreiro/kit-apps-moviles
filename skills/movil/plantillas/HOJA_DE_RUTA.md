@@ -7,6 +7,7 @@ _Actualizado: AAAA-MM-DD_
 ## Hitos
 
 - [ ] **H0 · Preparación**: entorno instalado, proyecto Expo creado, la app en blanco se abre en el móvil.
+- [ ] **H0.5 · App en blanco en la tienda**: primer `eas build`; la app vacía en TestFlight interno (iPhone) y en la prueba interna de Google Play (Android). Sin funciones.
 - [ ] **H1 · <nombre>**: …
 - [ ] **H2 · <nombre>**: …
 - [ ] **H3 · <nombre>**: …
@@ -22,5 +23,14 @@ _Actualizado: AAAA-MM-DD_
 - **Hecho cuando** (se comprueba en el móvil):
   1. …
   2. …
-- **Depende de:** H0
+- **Depende de:** H0.5
+- **¿Development build?:** no / sí (por qué) <!-- en iPhone, requiere Apple Developer pagado -->
 - **Notas:** …
+
+### H0.5 · App en blanco en la tienda
+- **Objetivo:** comprobar cuentas, firma y subida antes de programar nada.
+- **Hecho cuando** (se comprueba en el móvil):
+  1. La app en blanco aparece en TestFlight en su iPhone y se abre (si va a iOS).
+  2. La app en blanco se instala desde la prueba interna de Google Play en su Android y se abre (si va a Android).
+  3. El bundle id / package definitivo está en `app.json` y en las dos consolas.
+- **Depende de:** H0 y las cuentas de Apple / Google pagadas.

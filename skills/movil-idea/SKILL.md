@@ -24,7 +24,7 @@ Lee `REGLAS.md` de la skill `movil`. Plantillas: `REQUISITOS.md` y `PRIVACIDAD.m
 
 ## Señales de alarma (díselas pronto)
 
-- **Necesita cuentas + datos compartidos entre personas** → hace falta backend (ver `movil-backend`). Más trabajo, más privacidad que declarar.
+- **Necesita cuentas, sincronizar entre dispositivos o datos compartidos entre personas** → hace falta backend (ver `movil-backend`). Más trabajo, más coste y más privacidad que declarar. Si no, **sin backend**: los datos viven en el móvil. Rellena «¿Hace falta servidor?» en `REQUISITOS.md` con el porqué.
 - **Contenido creado por usuarios visible para otros** → la tienda exige reportar, bloquear y moderar.
 - **Ubicación en segundo plano, salud, menores, dinero real, apuestas, alcohol** → revisión más dura; hay que justificar cada permiso. Hay temáticas que Apple directamente no acepta: compruébalo en las App Review Guidelines antes de seguir.
 - **«Como Instagram/Uber pero…»** → alcance enorme; en `movil-alcance` habrá que recortar mucho.

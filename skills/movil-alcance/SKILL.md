@@ -22,9 +22,11 @@ Lee `REGLAS.md` de la skill `movil`, `plan/REQUISITOS.md` y `plan/PERFIL.md`. Pl
    - Solo móvil (iPhone, sin iPad: `supportsTablet: false`).
    - Sin pagos en la v1; se añaden cuando haya usuarios.
    - Sin panel de administración: se edita en la consola del backend.
-4. **Añade lo obligatorio de tienda** (sección de la plantilla): privacidad, soporte, borrar cuenta, login con Apple si hay otros logins sociales, reportar/bloquear si hay contenido de usuarios, textos de permisos, cuenta demo.
-5. **Riesgos**: los 2-3 que pueden tumbar el plan (permiso delicado, temática sensible, dependencia de un servicio externo, falta de testers) y qué hacer.
-6. Repasa el resultado con ella y pide un «sí, esto es la v1».
+4. **Filtro de funciones nativas.** Repasa los requisitos del MVP y marca los que necesitan código nativo que **no está en Expo Go**: notificaciones push, mapas nativos, login con Google o con Apple, widgets, compras integradas, Bluetooth, tareas en segundo plano… (comprueba cada librería en su doc: si dice «config plugin» o «not available in Expo Go», es nativa). Cada una obliga a usar un *development build*, y en iPhone eso **adelanta el pago de los 99 € de Apple** a ese hito. Para cada una pregunta: «¿la app sirve sin esto en la v1?». Si sí, fuera (o una alternativa sin nativo: recordatorios locales en vez de push, un mapa que funcione en Expo Go (compruébalo en la doc) o un enlace que abra la app de mapas del móvil, cuenta con email en vez de login social). Anota la decisión en `ALCANCE.md` y, si entra alguna, el hito en que habrá que pagar.
+5. **Sin backend si se puede.** Por defecto los datos se guardan en el móvil. Si algún requisito obliga a servidor (cuentas, sincronizar entre dispositivos, datos compartidos entre personas), confirma que es imprescindible para la v1 y que el porqué queda escrito en `REQUISITOS.md`.
+6. **Añade lo obligatorio de tienda** (sección de la plantilla): privacidad, soporte, borrar cuenta, login con Apple si hay otros logins sociales, reportar/bloquear si hay contenido de usuarios, textos de permisos, cuenta demo.
+7. **Riesgos**: los 2-3 que pueden tumbar el plan (permiso delicado, temática sensible, dependencia de un servicio externo, falta de testers) y qué hacer.
+8. Repasa el resultado con ella y pide un «sí, esto es la v1».
 
 ## Reglas duras
 

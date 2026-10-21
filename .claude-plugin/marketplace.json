@@ -8,7 +8,10 @@
     {
       "name": "kit-movil",
       "source": "./",
-      "description": "Entrevista, requisitos, alcance, hitos, desarrollo con Expo, pruebas y publicación en las tiendas."
+      "description": "Entrevista, requisitos, alcance, hitos, desarrollo con Expo, pruebas y publicación en las tiendas.",
+      "version": "0.1.0",
+      "license": "MIT",
+      "homepage": "https://devidbarreiro.github.io/kit-apps-moviles/"
     }
   ]
 }
