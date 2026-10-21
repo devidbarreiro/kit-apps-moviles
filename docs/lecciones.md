@@ -37,7 +37,7 @@ Resumen de lo que aprendimos llevando varias apps propias (un mapa con cuentas y
 
 ## Tiendas
 
-21. **Abre las cuentas pronto**: Apple (99 €/año) y Google (25 $) tardan días en verificarse.
+21. **Abre las cuentas pronto**: Apple (99 USD/año) y Google (25 USD) tardan días en verificarse.
 22. **Google, cuenta personal nueva**: 12 testers durante 14 días seguidos antes de producción. Recluta 15-20 y empieza en cuanto la ficha esté completa.
 23. **Declara tu estado de comerciante en la UE (DSA).** Una app aprobada no aparecía en las tiendas europeas por no hacerlo.
 24. **El nombre y el identificador son para siempre.** Comprueba que el nombre está libre antes de diseñar la marca.

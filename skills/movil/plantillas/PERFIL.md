@@ -20,8 +20,8 @@ _Actualizado: AAAA-MM-DD_
 | Cuenta | ¿La tiene? | Tipo (personal / empresa) | Notas |
 |---|---|---|---|
 | Expo (expo.dev) | | | gratis |
-| Apple Developer Program | | | 99 €/año |
-| Google Play Console | | | 25 $ una vez |
+| Apple Developer Program | | | 99 USD/año |
+| Google Play Console | | | 25 USD una vez |
 | GitHub | | | gratis, repo privado |
 | Backend (p. ej. Supabase) | | | plan gratuito al inicio |
 

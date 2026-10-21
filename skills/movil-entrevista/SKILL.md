@@ -17,7 +17,7 @@ Lee `REGLAS.md` de la skill `movil`. Plantilla: `plantillas/PERFIL.md` de la ski
 2. **Móviles**: ¿Tiene iPhone? ¿Android? ¿Puede pedir prestado el otro?
 3. **Tiendas**: ¿iOS, Android o las dos? ¿Cuál primero?
 4. **Cuentas**: ¿Tiene ya cuenta de Apple Developer, Google Play Console, Expo y GitHub? ¿Las abrirá como **persona** o como **empresa**?
-5. **Presupuesto**: ¿Puede pagar 99 €/año (Apple) y 25 $ una vez (Google)? ¿Algo al mes para servicios?
+5. **Presupuesto**: ¿Puede pagar 99 USD/año (Apple) y 25 USD una vez (Google)? ¿Algo al mes para servicios?
 6. **Experiencia y tiempo**: ¿Ha hecho algo técnico antes? ¿Cuántas horas a la semana? ¿Hay fecha objetivo?
 7. **Testers de Android**: si quiere Google Play con cuenta personal nueva, ¿conoce a unas **15 personas con móvil Android** dispuestas a instalar una versión de prueba y no borrarla en dos semanas? (Google pide 12 durante 14 días; se piden 15 porque alguno se cae.)
 
@@ -31,7 +31,7 @@ Comprueba hoy qué SDK abre la Expo Go de la tienda (https://expo.dev/go y el *c
 
 | Su caso | Qué significa | Recomendación |
 |---|---|---|
-| **Windows (o Mac sin Xcode) + iPhone, sin pagar los 99 €** | Solo puede probar con Expo Go. Si sale un SDK nuevo a mitad del proyecto, tendrá que actualizar el proyecto (a veces rompe cosas) o pagar Apple para pasar a *development build*. | Aceptable para empezar si el MVP no tiene nada nativo (ver `movil-alcance`). Avisa ya de que antes de publicar pagará igualmente. |
+| **Windows (o Mac sin Xcode) + iPhone, sin pagar los 99 USD** | Solo puede probar con Expo Go. Si sale un SDK nuevo a mitad del proyecto, tendrá que actualizar el proyecto (a veces rompe cosas) o pagar Apple para pasar a *development build*. | Aceptable para empezar si el MVP no tiene nada nativo (ver `movil-alcance`). Avisa ya de que antes de publicar pagará igualmente. |
 | **Android** | Expo Go o un *development build* (APK) gratis, sin restricciones. | Sin problema. |
 | **Mac con Xcode** | El simulador de iPhone abre cualquier SDK; puede trabajar sin pagar hasta publicar. | Sin problema si tiene espacio para Xcode. |
 | **Va a pagar Apple pronto** | *Development build* en su iPhone desde el principio; las actualizaciones de Expo Go dejan de importar. | La opción más tranquila si el MVP tiene algo nativo. |
@@ -57,7 +57,7 @@ Por defecto, **persona** (más rápido; no pide D-U-N-S). Empresa solo si ya exi
 | **Sin Android** | Igual: un emulador sirve para desarrollar, pero la prueba cerrada de Google exige testers reales. |
 | **Cuenta personal nueva de Google Play** | Antes de publicar: **prueba cerrada con al menos 12 testers durante 14 días seguidos**. Hay que tener los 12 contactos pensados desde ya. Con cuenta de **empresa** no se exige, pero pide número D-U-N-S (gratis, tarda días o semanas). |
 | **Cuenta de Apple como empresa** | Pide D-U-N-S y que la empresa exista legalmente. Como persona, en la tienda sale su nombre real como vendedor. |
-| **Sin presupuesto para Apple** | Puede desarrollar y probar con Expo Go gratis; los 99 € solo hacen falta para TestFlight, development builds en iPhone y publicar. Ojo con la trampa de Expo Go (decisión A) y con las funciones nativas del MVP (`movil-alcance`), que adelantan el pago. |
+| **Sin presupuesto para Apple** | Puede desarrollar y probar con Expo Go gratis; los 99 USD solo hacen falta para TestFlight, development builds en iPhone y publicar. Ojo con la trampa de Expo Go (decisión A) y con las funciones nativas del MVP (`movil-alcance`), que adelantan el pago. |
 | **Poco tiempo** | MVP más pequeño y hitos de una semana. |
 
 Costes de referencia (verificados 2026-10; comprueba los actuales en `referencias/tiendas.md` → «Requisitos con fecha» y díselo):

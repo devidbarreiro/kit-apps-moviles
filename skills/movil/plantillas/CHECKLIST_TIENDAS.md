@@ -18,7 +18,7 @@ _Actualizado: AAAA-MM-DD_ · Marca cada casilla solo cuando esté comprobada.
 - [ ] Probada en un móvil real con el build de producción, no solo en desarrollo
 
 ## App Store (Apple)
-- [ ] Apple Developer Program activo (99 €/año)
+- [ ] Apple Developer Program activo (99 USD/año)
 - [ ] App creada en App Store Connect con el bundle identifier definitivo
 - [ ] `ios.supportsTablet: false` si no está diseñada para iPad (si no, piden capturas de iPad y la revisan en iPad)
 - [ ] `ios.infoPlist.ITSAppUsesNonExemptEncryption: false` (si solo usa HTTPS estándar)
@@ -32,7 +32,7 @@ _Actualizado: AAAA-MM-DD_ · Marca cada casilla solo cuando esté comprobada.
 - [ ] Login con Google/Facebook/etc. → también «Iniciar sesión con Apple»
 
 ## Google Play
-- [ ] Cuenta de Play Console verificada (25 $ una vez; verificación de identidad y de un móvil Android)
+- [ ] Cuenta de Play Console verificada (25 USD una vez; verificación de identidad y de un móvil Android)
 - [ ] Si la cuenta es personal y nueva: **prueba cerrada con al menos 12 testers durante 14 días seguidos** antes de poder pedir producción
 - [ ] Ficha: nombre (30), descripción breve (80), descripción completa (4000), icono 512×512, gráfico destacado 1024×500, capturas de teléfono (mín. 2)
 - [ ] «Seguridad de los datos» rellenado desde `plan/PRIVACIDAD.md`

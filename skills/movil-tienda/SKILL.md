@@ -15,8 +15,8 @@ Lee `REGLAS.md` y `referencias/tiendas.md` de la skill `movil`, `plan/PRIVACIDAD
 
 Si H0.5 está hecho, las cuentas y la app en las dos consolas ya existen: revisa solo lo que falte de este punto (acuerdos, DSA).
 
-- **Apple Developer Program** (99 €/año): https://developer.apple.com/programs/enroll/. Como persona: tu nombre real saldrá como vendedor. Como empresa: necesita número D-U-N-S.
-- **Google Play Console** (25 $ una vez): https://play.google.com/console/signup. Verificación de identidad y de un móvil Android. **Cuenta personal nueva → prueba cerrada obligatoria** (punto 6).
+- **Apple Developer Program** (99 USD/año): https://developer.apple.com/programs/enroll/. Como persona: tu nombre real saldrá como vendedor. Como empresa: necesita número D-U-N-S.
+- **Google Play Console** (25 USD una vez): https://play.google.com/console/signup. Verificación de identidad y de un móvil Android. **Cuenta personal nueva → prueba cerrada obligatoria** (punto 6).
 - **Acuerdos y datos fiscales/bancarios**: solo obligatorios si cobra (app de pago o compras integradas). Si es gratis, no hacen falta para publicar.
 - **UE (DSA)**: ambas tiendas piden declarar si eres **comerciante** («trader»). Si no se declara, la app puede **no aparecer en las tiendas de la UE** aunque esté aprobada. Si cobra o es actividad profesional, es comerciante y su dirección y teléfono serán públicos en la ficha. Decídelo antes del lanzamiento (consulta la ayuda de cada tienda).
 

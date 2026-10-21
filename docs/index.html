@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kit de apps móviles · De tu idea a la App Store y Google Play con Claude</title>
+<meta name="description" content="Kit gratuito y de código abierto de skills para Claude Code: te guía desde la idea hasta publicar tu app en la App Store y Google Play con Expo, aunque no sepas programar. En español.">
+<link rel="canonical" href="https://devidbarreiro.github.io/kit-apps-moviles/">
+<meta name="theme-color" content="#0a1110" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f5f8f6" media="(prefers-color-scheme: light)">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="Kit de apps móviles">
+<meta property="og:title" content="De tu idea a la App Store y Google Play, con Claude">
+<meta property="og:description" content="Kit gratuito de skills para Claude Code que te acompaña desde la idea hasta publicar tu app, aunque no sepas programar.">
+<meta property="og:url" content="https://devidbarreiro.github.io/kit-apps-moviles/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="De tu idea a la App Store y Google Play, con Claude">
+<meta name="twitter:description" content="Kit gratuito de skills para Claude Code que te acompaña desde la idea hasta publicar tu app.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230a1110'/%3E%3Crect x='20' y='10' width='24' height='44' rx='6' fill='none' stroke='%2345d6a4' stroke-width='4'/%3E%3Cpath d='M26 33l5 5 9-11' fill='none' stroke='%2345d6a4' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preload" href="fuentes/montserrat-800.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('fuentes/montserrat-700.woff2') format('woff2')}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:swap;src:url('fuentes/montserrat-800.woff2') format('woff2')}
+
+:root{
+  --fondo:#0a1110; --fondo-2:#101a18; --fondo-3:#16231f;
+  --texto:#f4f7f4; --gris:#a4b0ab; --apagado:#76837d;
+  --acento:#45d6a4; --acento-fuerte:#2fb487; --acento-tinta:#062018;
+  --linea:rgb(244 247 244 / .1); --linea-fuerte:rgb(244 247 244 / .16);
+  --brillo:rgb(69 214 164 / .2); --brillo-2:rgb(52 160 214 / .12);
+  --punto:rgb(244 247 244 / .07);
+  --cristal:rgb(16 26 24 / .66);
+  --aviso:#e8b04a;
+  --sombra:0 30px 60px -30px rgb(0 0 0 / .85);
+  --titular:'Montserrat',ui-sans-serif,system-ui,sans-serif;
+  --sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --serif:ui-serif,'New York','Iowan Old Style','Palatino Linotype',Georgia,serif;
+  --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;
+  --suave:cubic-bezier(.16,1,.3,1);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:light){
+  :root{
+    --fondo:#f5f8f6; --fondo-2:#ffffff; --fondo-3:#ebf1ee;
+    --texto:#0e1a17; --gris:#4b5a54; --apagado:#6c7a74;
+    --acento:#0f8a66; --acento-fuerte:#0b6e51; --acento-tinta:#ffffff;
+    --linea:rgb(14 26 23 / .1); --linea-fuerte:rgb(14 26 23 / .18);
+    --brillo:rgb(15 138 102 / .14); --brillo-2:rgb(52 120 214 / .08);
+    --punto:rgb(14 26 23 / .09);
+    --cristal:rgb(255 255 255 / .72);
+    --aviso:#a86b00;
+    --sombra:0 30px 60px -34px rgb(14 26 23 / .35);
+    color-scheme:light;
+  }
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:5rem}
+body{margin:0;background:var(--fondo);color:var(--texto);font-family:var(--sans);font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--acento);outline-offset:3px;border-radius:6px}
+::selection{background:var(--acento);color:var(--acento-tinta)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Ambiente: resplandor en los bordes y rejilla de puntos, capas fijas. */
+body::before,body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0}
+body::before{background:
+  radial-gradient(60% 45% at 0% 0%,var(--brillo),transparent 70%),
+  radial-gradient(55% 40% at 100% 0%,var(--brillo-2),transparent 70%),
+  radial-gradient(70% 45% at 50% 115%,var(--brillo),transparent 70%)}
+body::after{background-image:radial-gradient(var(--punto) 1px,transparent 1px);background-size:22px 22px;
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,#000 30%,transparent 100%);
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,#000 30%,transparent 100%)}
+main,header,footer{position:relative;z-index:1}
+
+.envoltura{max-width:72rem;margin:0 auto;padding:0 16px}
+@media (min-width:40rem){.envoltura{padding:0 24px}}
+
+/* Cabecera */
+.cabecera{position:sticky;top:0;z-index:10;padding:12px 0}
+.barra{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 10px 8px 14px;border-radius:1rem;background:var(--cristal);border:1px solid var(--linea);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%)}
+.marca{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--titular);font-weight:800;letter-spacing:-.02em;white-space:nowrap}
+.marca svg{width:28px;height:28px;flex:none}
+.nav{display:none;gap:4px}
+.nav a{padding:6px 10px;border-radius:.6rem;text-decoration:none;color:var(--gris);font-size:.92rem}
+.nav a:hover{color:var(--texto);background:var(--linea)}
+@media (min-width:56rem){.nav{display:flex}}
+
+/* Botones */
+.boton{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-height:2.9rem;padding:.7rem 1.2rem;border-radius:.9rem;font-weight:650;font-size:.97rem;line-height:1.1;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .3s var(--suave),background-color .3s var(--suave),border-color .3s var(--suave)}
+.boton:active{transform:translateY(1px) scale(.985)}
+.boton-principal{background:var(--acento);color:var(--acento-tinta);box-shadow:0 0 0 4px var(--brillo),0 14px 30px -14px var(--acento)}
+.boton-principal:hover{background:var(--acento-fuerte);transform:translateY(-1px)}
+.boton-fantasma{border-color:var(--linea-fuerte);background:var(--linea);color:var(--texto)}
+.boton-fantasma:hover{border-color:var(--acento)}
+.boton-mini{min-height:2.3rem;padding:.45rem .85rem;font-size:.88rem;border-radius:.7rem}
+
+/* Hero */
+.hero{padding:56px 0 24px;text-align:center}
+@media (min-width:40rem){.hero{padding:88px 0 32px}}
+.pildora{display:inline-flex;align-items:center;gap:.6rem;padding:.38rem .9rem;border-radius:999px;background:var(--cristal);border:1px solid var(--linea);font-size:.84rem;color:var(--gris)}
+.pildora b{color:var(--texto);font-weight:600}
+.punto-vivo{width:8px;height:8px;border-radius:50%;background:var(--aviso);animation:late 2.4s ease-in-out infinite}
+@keyframes late{0%,100%{box-shadow:0 0 0 0 rgb(232 176 74 / .55)}50%{box-shadow:0 0 0 5px rgb(232 176 74 / 0)}}
+h1{font-family:var(--titular);font-weight:800;font-size:clamp(2.15rem,7.4vw,4.6rem);line-height:1.04;letter-spacing:-.045em;margin:1.4rem auto 0;max-width:15ch}
+h1 .remate,h2 .remate{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:-.02em;color:var(--acento)}
+.entradilla{max-width:36rem;margin:1.4rem auto 0;font-size:1.08rem;color:var(--gris)}
+.entradilla strong{color:var(--texto);font-weight:600}
+.acciones{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:2rem}
+.nota-hero{margin-top:1rem;font-size:.88rem;color:var(--apagado)}
+
+/* Ventana de terminal */
+.ventana{max-width:46rem;margin:3rem auto 0;border-radius:1.25rem;border:1px solid var(--linea);background:var(--fondo-2);box-shadow:inset 0 1px 0 var(--linea),var(--sombra);overflow:hidden;text-align:left}
+.ventana-barra{display:flex;justify-content:space-between;gap:1rem;padding:.7rem 1rem;border-bottom:1px solid var(--linea);font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;color:var(--apagado)}
+.ventana-barra .luces{display:flex;gap:6px;align-items:center}
+.ventana-barra .luces i{width:9px;height:9px;border-radius:50%;background:var(--linea-fuerte)}
+.chat{padding:18px 16px 20px;font-size:.93rem;display:grid;gap:12px}
+@media (min-width:40rem){.chat{padding:22px 24px 26px}}
+.linea-tu{font-family:var(--mono);color:var(--texto);overflow-wrap:anywhere}
+.linea-tu::before{content:'> ';color:var(--acento)}
+.linea-claude{color:var(--gris);padding-left:14px;border-left:2px solid var(--brillo)}
+.linea-claude b{color:var(--texto);font-weight:600}
+.opciones{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.opciones span{font-family:var(--mono);font-size:.78rem;padding:3px 9px;border-radius:999px;border:1px solid var(--linea-fuerte);color:var(--texto)}
+.opciones span.si{border-color:var(--acento);color:var(--acento)}
+
+/* Secciones */
+.seccion{margin-top:96px}
+@media (min-width:40rem){.seccion{margin-top:128px}}
+.seccion>.envoltura>.cabeza{border-top:1px solid var(--linea);padding-top:44px}
+.etiqueta{display:flex;gap:1rem;font-family:var(--mono);font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gris);margin:0}
+.etiqueta span:first-child{color:var(--acento)}
+h2{font-family:var(--titular);font-weight:800;font-size:clamp(1.9rem,5.2vw,3rem);line-height:1.06;letter-spacing:-.035em;margin:1.2rem 0 0;max-width:20ch}
+.intro{max-width:40rem;color:var(--gris);font-size:1.03rem;margin:1rem 0 0}
+.intro strong{color:var(--texto);font-weight:600}
+
+/* Tarjetas */
+.rejilla{display:grid;gap:14px;margin-top:2.4rem}
+@media (min-width:44rem){.rejilla-3{grid-template-columns:repeat(3,1fr)}.rejilla-2{grid-template-columns:repeat(2,1fr)}.rejilla-4{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:64rem){.rejilla-4{grid-template-columns:repeat(4,1fr)}}
+.tarjeta{border-radius:1.15rem;border:1px solid var(--linea);background:var(--fondo-2);padding:20px;box-shadow:inset 0 1px 0 var(--linea)}
+.tarjeta h3{font-family:var(--titular);font-weight:700;font-size:1.08rem;letter-spacing:-.015em;margin:0 0 .4rem;line-height:1.25}
+.tarjeta p{margin:0;color:var(--gris);font-size:.96rem}
+.icono{width:38px;height:38px;border-radius:.75rem;display:grid;place-items:center;background:var(--brillo);color:var(--acento);margin-bottom:14px}
+.icono svg{width:20px;height:20px}
+
+/* Camino de fases */
+.camino{list-style:none;margin:2.6rem 0 0;padding:0;display:grid;gap:10px;counter-reset:paso}
+@media (min-width:52rem){.camino{grid-template-columns:repeat(2,1fr);column-gap:28px}}
+.paso{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;padding:14px 16px;border-radius:1rem;border:1px solid var(--linea);background:var(--fondo-2)}
+.paso .num{font-family:var(--mono);font-size:.8rem;width:2.4rem;height:2.4rem;border-radius:.7rem;display:grid;place-items:center;background:var(--fondo-3);color:var(--gris);border:1px solid var(--linea)}
+.paso h3{margin:0;font-size:1rem;font-weight:650;line-height:1.3}
+.paso p{margin:.2rem 0 0;color:var(--gris);font-size:.92rem}
+.paso code{font-family:var(--mono);font-size:.82em;color:var(--apagado)}
+.paso.clave{border-color:var(--acento);box-shadow:0 0 0 4px var(--brillo)}
+.paso.clave .num{background:var(--acento);color:var(--acento-tinta);border-color:transparent;font-weight:700}
+.sello{display:inline-block;margin-left:.4rem;padding:1px 8px;border-radius:999px;font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;background:var(--brillo);color:var(--acento);vertical-align:2px}
+
+/* Lo que incluye */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chips code{font-family:var(--mono);font-size:.78rem;padding:4px 9px;border-radius:.5rem;background:var(--fondo-3);border:1px solid var(--linea);color:var(--texto)}
+.cifra{font-family:var(--titular);font-weight:800;font-size:2.4rem;letter-spacing:-.04em;line-height:1;color:var(--acento);margin-bottom:.5rem}
+
+/* Instalación */
+.pasos-instalar{counter-reset:inst;list-style:none;padding:0;margin:2.4rem 0 0;display:grid;gap:14px}
+.pasos-instalar>li{counter-increment:inst;position:relative;padding:20px 18px 20px 62px;border-radius:1.15rem;border:1px solid var(--linea);background:var(--fondo-2)}
+.pasos-instalar>li::before{content:counter(inst);position:absolute;left:18px;top:18px;width:2rem;height:2rem;border-radius:.6rem;display:grid;place-items:center;background:var(--acento);color:var(--acento-tinta);font-family:var(--titular);font-weight:800}
+.pasos-instalar h3{margin:0 0 .3rem;font-family:var(--titular);font-weight:700;font-size:1.06rem}
+.pasos-instalar p{margin:.3rem 0 0;color:var(--gris);font-size:.95rem}
+.pasos-instalar p strong{color:var(--texto);font-weight:600}
+.so{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--apagado);margin:.9rem 0 .35rem}
+.comando{display:flex;align-items:stretch;gap:0;border-radius:.8rem;border:1px solid var(--linea-fuerte);background:var(--fondo);overflow:hidden;margin-top:.6rem}
+.comando code{flex:1;min-width:0;padding:.75rem .9rem;font-family:var(--mono);font-size:.88rem;line-height:1.45;overflow-wrap:anywhere;color:var(--texto)}
+.copiar{flex:none;border:0;border-left:1px solid var(--linea-fuerte);background:var(--fondo-3);color:var(--gris);font:600 .8rem var(--sans);padding:0 .9rem;cursor:pointer;min-width:5.2rem}
+.copiar:hover{color:var(--texto)}
+.copiar.hecho{color:var(--acento)}
+.ok{color:var(--acento)}
+@media (max-width:30rem){.pasos-instalar>li{padding:64px 14px 16px}.pasos-instalar>li::before{left:14px;top:16px}.comando code{font-size:.82rem;padding:.7rem .75rem}.copiar{min-width:4.3rem;padding:0 .6rem}}
+
+/* Costes */
+.tabla{margin-top:2.4rem;border:1px solid var(--linea);border-radius:1.15rem;overflow:hidden;background:var(--fondo-2)}
+.fila{display:grid;grid-template-columns:1fr;gap:4px;padding:16px 18px;border-top:1px solid var(--linea)}
+.fila:first-child{border-top:0}
+@media (min-width:44rem){.fila{grid-template-columns:1.1fr .9fr 1.4fr;gap:16px;align-items:baseline}}
+.fila .que{font-weight:650}
+.fila .precio{font-family:var(--titular);font-weight:800;letter-spacing:-.02em;color:var(--acento)}
+.fila .cuando{color:var(--gris);font-size:.94rem}
+.verificado{display:block;margin-top:1rem;font-family:var(--mono);font-size:.78rem;line-height:1.7;color:var(--gris)}
+.verificado::before{content:'';display:inline-block;width:7px;height:7px;margin-right:.5rem;border-radius:50%;background:var(--acento);vertical-align:1px}
+.verificado a{color:var(--texto)}
+
+/* Preguntas */
+.preguntas{margin-top:2.4rem;display:grid;gap:10px}
+details{border:1px solid var(--linea);border-radius:1rem;background:var(--fondo-2);padding:0 18px}
+summary{cursor:pointer;list-style:none;padding:16px 28px 16px 0;font-weight:650;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';position:absolute;right:0;top:12px;font:400 1.4rem var(--mono);color:var(--acento);transition:transform .3s var(--suave)}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin:0 0 16px;color:var(--gris)}
+details p strong{color:var(--texto);font-weight:600}
+
+/* Aviso */
+.aviso{margin-top:2.4rem;border:1px solid var(--linea);border-left:3px solid var(--aviso);border-radius:1rem;background:var(--fondo-2);padding:18px 20px}
+.aviso h3{margin:0 0 .4rem;font-size:1rem}
+.aviso p{margin:.3rem 0 0;color:var(--gris);font-size:.95rem}
+
+/* Cierre */
+.cierre{text-align:center;padding:56px 18px;border-radius:1.5rem;border:1px solid var(--linea);background:radial-gradient(70% 90% at 50% 100%,var(--brillo),transparent 70%),var(--fondo-2)}
+.cierre h2{margin:0 auto;max-width:18ch}
+.cierre p{color:var(--gris);max-width:32rem;margin:1rem auto 0}
+
+footer{margin-top:96px;border-top:1px solid var(--linea);padding:28px 0 40px;font-size:.88rem;color:var(--apagado)}
+.pie{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;align-items:center}
+.pie nav{display:flex;flex-wrap:wrap;gap:6px 18px}
+.pie a{color:var(--gris);text-decoration:none}
+.pie a:hover{color:var(--texto)}
+
+@keyframes aparece{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.aparece{animation:aparece .9s var(--suave) both;animation-delay:calc(var(--i,0)*90ms)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<a class="sr" href="#contenido">Saltar al contenido</a>
+
+<header class="cabecera">
+  <div class="envoltura">
+    <div class="barra">
+      <a class="marca" href="#" aria-label="Kit de apps móviles, inicio">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="var(--fondo-3)"/><rect x="20" y="10" width="24" height="44" rx="6" fill="none" stroke="var(--acento)" stroke-width="4"/><path d="M26 33l5 5 9-11" fill="none" stroke="var(--acento)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Kit de apps móviles
+      </a>
+      <nav class="nav" aria-label="Secciones">
+        <a href="#como">Cómo funciona</a>
+        <a href="#incluye">Qué incluye</a>
+        <a href="#instalar">Instalar</a>
+        <a href="#costes">Costes</a>
+        <a href="#preguntas">Preguntas</a>
+      </nav>
+      <a class="boton boton-fantasma boton-mini" href="https://github.com/devidbarreiro/kit-apps-moviles" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+  <section class="hero" aria-labelledby="titular">
+    <div class="envoltura">
+      <p class="pildora aparece" style="--i:0"><span class="punto-vivo" aria-hidden="true"></span><b>v0.1 · en pruebas</b> · gratis y de código abierto</p>
+      <h1 id="titular" class="aparece" style="--i:1">De tu idea a la App Store y Google Play. <span class="remate">Con Claude.</span></h1>
+      <p class="entradilla aparece" style="--i:2">Un kit de <em>skills</em> para <strong>Claude Code</strong> que te acompaña paso a paso, en español: te entrevista, planifica contigo, programa la app con <strong>Expo</strong>, te dice qué probar en tu móvil y te guía hasta publicarla. <strong>Para quien no ha programado nunca.</strong></p>
+      <div class="acciones aparece" style="--i:3">
+        <a class="boton boton-principal" href="#instalar">Instalar el kit</a>
+        <a class="boton boton-fantasma" href="#como">Ver cómo funciona</a>
+      </div>
+      <p class="nota-hero aparece" style="--i:4">Mac o Windows · iPhone y Android · necesitas un plan de pago de Claude</p>
+
+      <div class="ventana aparece" style="--i:5" role="img" aria-label="Ejemplo de conversación: escribes /kit-movil:movil y Claude te pregunta si trabajas en Mac o en Windows, te explica qué implica y te propone el siguiente paso.">
+        <div class="ventana-barra"><span class="luces" aria-hidden="true"><i></i><i></i><i></i></span><span>claude · ~/apps</span></div>
+        <div class="chat" aria-hidden="true">
+          <p class="linea-tu" style="margin:0">/kit-movil:movil</p>
+          <div class="linea-claude">Vamos por fases, como una obra: primero los planos, luego los cimientos y después la construcción por hitos que vas probando en tu móvil. Todo queda apuntado en <b>plan/</b>.<br>Primera pregunta: <b>¿trabajas en Mac o en Windows?</b>
+            <div class="opciones"><span>Mac</span><span class="si">Windows</span></div>
+          </div>
+          <p class="linea-tu" style="margin:0">Windows, y tengo un iPhone</p>
+          <div class="linea-claude">Perfecto: puedes hacer la app de iPhone sin Mac, se compila en la nube. Antes de seguir, decidamos <b>cuándo pagar los 99&nbsp;USD de Apple</b>, porque cambia cómo probarás en tu móvil…</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="para-quien" aria-labelledby="para-quien-t">
+    <div class="envoltura">
+      <div class="cabeza">
+        <p class="etiqueta"><span>00</span><span>Para quién</span></p>
+        <h2 id="para-quien-t">Tienes una idea. <span class="remate">No sabes programar.</span></h2>
+        <p class="intro">Tú decides y pruebas en el móvil. Claude pregunta, programa, consulta la documentación oficial y te explica cada paso en llano. Todo queda apuntado en una carpeta <code>plan/</code> para seguir otro día sin perder el hilo.</p>
+      </div>
+      <div class="rejilla rejilla-3">
+        <article class="tarjeta">
+          <div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></div>
+          <h3>Quieres una app de verdad</h3>
+          <p>No una demo: una app publicada en las tiendas, con su ficha, su política de privacidad y sus actualizaciones.</p>
+        </article>
+        <article class="tarjeta">
+          <div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="14" height="11" rx="2"/><path d="M6 19h6"/><rect x="17" y="8" width="5" height="12" rx="1.5"/></svg></div>
+          <h3>Con el ordenador que tengas</h3>
+          <p>Mac o Windows. Con Windows también llegas a la App Store: la app de iPhone se compila en la nube.</p>
+        </article>
+        <article class="tarjeta">
+          <div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <h3>Sin sustos</h3>
+          <p>Claude no paga, no abre cuentas por ti ni publica sin tu «sí». Seguridad y privacidad desde el primer día.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="como" aria-labelledby="como-t">
+    <div class="envoltura">
+      <div class="cabeza">
+        <p class="etiqueta"><span>01</span><span>Cómo funciona</span></p>
+        <h2 id="como-t">Diez pasos. <span class="remate">Uno cada vez.</span></h2>
+        <p class="intro">Cada fase es una <em>skill</em>. Escribes <code>/kit-movil:movil</code> y Claude mira dónde estás y te lleva a la siguiente. Cada hito termina con algo que <strong>ves en tu móvil</strong>.</p>
+      </div>
+      <ol class="camino">
+        <li class="paso"><span class="num">01</span><div><h3>Entrevista</h3><p>Mac o Windows, qué móviles tienes, presupuesto, cuentas. Con eso sabe qué es posible.</p></div></li>
+        <li class="paso"><span class="num">02</span><div><h3>Idea</h3><p>Para quién es, qué problema resuelve, qué tiene que poder hacer. Sale una lista de requisitos.</p></div></li>
+        <li class="paso"><span class="num">03</span><div><h3>Alcance</h3><p>Qué entra en la primera versión y qué se queda para después. Sin servidor si no hace falta.</p></div></li>
+        <li class="paso"><span class="num">04</span><div><h3>Hitos</h3><p>El plan en etapas de una o dos semanas, cada una con criterios que compruebas tú.</p></div></li>
+        <li class="paso clave"><span class="num">H0.5</span><div><h3>App en blanco en la tienda <span class="sello">clave</span></h3><p>Antes de programar nada, la app vacía llega a TestFlight y a la prueba interna de Google. Los líos de cuentas y firmas salen ahora, no la semana del lanzamiento.</p></div></li>
+        <li class="paso"><span class="num">05</span><div><h3>Construir</h3><p>Un hito cada vez: Claude programa consultando la documentación oficial y tú lo pruebas en el móvil.</p></div></li>
+        <li class="paso"><span class="num">06</span><div><h3>Probar</h3><p>La app instalada de verdad y usada por otras personas una semana.</p></div></li>
+        <li class="paso"><span class="num">07</span><div><h3>Tiendas</h3><p>Nombre, capturas, política de privacidad, cuestionarios y los testers que pide Google.</p></div></li>
+        <li class="paso"><span class="num">08</span><div><h3>Publicar</h3><p>Envío a revisión, qué esperar y cómo responder si la rechazan, con casos reales.</p></div></li>
+        <li class="paso"><span class="num">09</span><div><h3>Actualizar</h3><p>Arreglos que llegan al momento sin revisión, versiones nuevas y la v1.1.</p></div></li>
+      </ol>
+      <p class="intro">¿Algo falla en cualquier momento? <code>movil-arreglar</code> lo diagnostica con método y con las trampas que ya conocemos.</p>
+    </div>
+  </section>
+
+  <section class="seccion" id="incluye" aria-labelledby="incluye-t">
+    <div class="envoltura">
+      <div class="cabeza">
+        <p class="etiqueta"><span>02</span><span>Qué incluye</span></p>
+        <h2 id="incluye-t">Lo que aprendimos publicando. <span class="remate">Escrito para Claude.</span></h2>
+        <p class="intro">Hecho con lo que nos encontramos llevando varias apps propias a la App Store y a Google Play: errores reales, rechazos reales y cómo se resolvieron.</p>
+      </div>
+      <div class="rejilla rejilla-4">
+        <article class="tarjeta">
+          <div class="cifra">13</div>
+          <h3>Skills</h3>
+          <p>Una por fase, más la de entrada y la de arreglar errores.</p>
+          <div class="chips"><code>movil</code><code>entrevista</code><code>idea</code><code>alcance</code><code>hitos</code><code>preparar</code><code>backend</code><code>hito</code><code>probar</code><code>tienda</code><code>publicar</code><code>actualizar</code><code>arreglar</code></div>
+        </article>
+        <article class="tarjeta">
+          <div class="cifra">9</div>
+          <h3>Plantillas</h3>
+          <p>Perfil, requisitos, alcance, hoja de ruta, estado, hito, privacidad, checklist de tiendas y política de privacidad.</p>
+        </article>
+        <article class="tarjeta">
+          <div class="cifra">3</div>
+          <h3>Referencias</h3>
+          <p>Las librerías que usar, las trampas técnicas con su arreglo y lo que piden las tiendas, con fecha y fuente oficial.</p>
+        </article>
+        <article class="tarjeta">
+          <div class="cifra">1</div>
+          <h3>Reglas para Claude</h3>
+          <p>Habla en llano, consulta la documentación oficial, enseña pruebas antes de decir «listo» y nunca paga ni publica sin permiso.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="instalar" aria-labelledby="instalar-t">
+    <div class="envoltura">
+      <div class="cabeza">
+        <p class="etiqueta"><span>03</span><span>Instalar</span></p>
+        <h2 id="instalar-t">Tres pasos. <span class="remate">Media hora, una vez.</span></h2>
+        <p class="intro">La guía completa, con qué debes ver en cada paso y qué hacer si no, está en el <a href="https://github.com/devidbarreiro/kit-apps-moviles#instalaci%C3%B3n">README</a>. En Windows, instala antes git: <code>winget install Git.Git</code>.</p>
+      </div>
+      <ol class="pasos-instalar">
+        <li>
+          <h3>Instala Claude Code</h3>
+          <p>Abre una terminal (Mac: «Terminal»; Windows: «PowerShell») y pega la orden de tu sistema.</p>
+          <p class="so">Mac</p>
+          <div class="comando"><code>curl -fsSL https://claude.ai/install.sh | bash</code><button class="copiar" type="button">Copiar</button></div>
+          <p class="so">Windows (PowerShell)</p>
+          <div class="comando"><code>irm https://claude.ai/install.ps1 | iex</code><button class="copiar" type="button">Copiar</button></div>
+          <p>Abre una terminal nueva y escribe <code>claude</code>. La primera vez te pide iniciar sesión con tu cuenta de Claude.</p>
+        </li>
+        <li>
+          <h3>Añade el catálogo del kit</h3>
+          <p>Dentro de Claude Code, escribe:</p>
+          <div class="comando"><code>/plugin marketplace add devidbarreiro/kit-apps-moviles</code><button class="copiar" type="button">Copiar</button></div>
+          <p><span class="ok">Va bien</span> si ves <code>Successfully added marketplace: kit-movil</code>.</p>
+        </li>
+        <li>
+          <h3>Instala el kit y empieza</h3>
+          <div class="comando"><code>/plugin install kit-movil@kit-movil</code><button class="copiar" type="button">Copiar</button></div>
+          <p>Lo de antes de la <strong>@</strong> es el plugin; lo de después, el catálogo. Elige <strong>Install for you</strong>. Después:</p>
+          <div class="comando"><code>/kit-movil:movil</code><button class="copiar" type="button">Copiar</button></div>
+          <p>Para actualizar más adelante: <code>/plugin marketplace update kit-movil</code>.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="seccion" id="costes" aria-labelledby="costes-t">
+    <div class="envoltura">
+      <div class="cabeza">
+        <p class="etiqueta"><span>04</span><span>Costes reales</span></p>
+        <h2 id="costes-t">El kit es gratis. <span class="remate">Publicar, no del todo.</span></h2>
+        <p class="intro">Desarrollar y probar en tu móvil cuesta poco. Pagas las cuentas de las tiendas cuando vas a publicar (o antes, si tu app necesita piezas nativas en iPhone).</p>
+      </div>
+      <div class="tabla" role="table" aria-label="Costes">
+        <div class="fila" role="row"><span class="que" role="cell">Claude Pro</span><span class="precio" role="cell">20 USD/mes</span><span class="cuando" role="cell">Desde el principio. 17 USD/mes pagando el año. Incluye Claude Code.</span></div>
+        <div class="fila" role="row"><span class="que" role="cell">Apple Developer Program</span><span class="precio" role="cell">99 USD/año</span><span class="cuando" role="cell">Para TestFlight, probar tu propia versión en iPhone y publicar en la App Store. En tu moneda al darte de alta.</span></div>
+        <div class="fila" role="row"><span class="que" role="cell">Google Play Console</span><span class="precio" role="cell">25 USD, una vez</span><span class="cuando" role="cell">Para publicar en Google Play. Cuenta personal nueva: prueba cerrada con 12 personas durante 14 días.</span></div>
+        <div class="fila" role="row"><span class="que" role="cell">Expo · EAS</span><span class="precio" role="cell">Gratis</span><span class="cuando" role="cell">15 builds de Android y 15 de iOS al mes, en cola de baja prioridad. Suficiente para empezar.</span></div>
+        <div class="fila" role="row"><span class="que" role="cell">Servidor</span><span class="precio" role="cell">0 por defecto</span><span class="cuando" role="cell">Los datos se guardan en el móvil. Solo con cuentas o datos compartidos: Supabase, gratis para empezar.</span></div>
+      </div>
+      <p class="verificado">verificado 2026-10 · <a href="https://github.com/devidbarreiro/kit-apps-moviles/blob/main/skills/movil/referencias/tiendas.md#requisitos-con-fecha-verificado-2026-10">fuentes oficiales</a> · los precios cambian</p>
+    </div>
+  </section>
+
+  <section class="seccion" id="preguntas" aria-labelledby="preguntas-t">
+    <div class="envoltura">
+      <div class="cabeza">
+        <p class="etiqueta"><span>05</span><span>Preguntas</span></p>
+        <h2 id="preguntas-t">Lo que todo el mundo <span class="remate">pregunta primero.</span></h2>
+      </div>
+      <div class="preguntas">
+        <details>
+          <summary>¿Windows o Mac?</summary>
+          <p>Los dos valen. Con <strong>Mac</strong> puedes hacerlo todo. Con <strong>Windows</strong>, Android completo y también iPhone: la app se compila en la nube y se prueba en un iPhone real. Ojo: con Windows y un iPhone, sin pagar Apple solo puedes probar con Expo Go, que solo abre la versión más reciente de Expo. La entrevista te ayuda a decidir cuándo pagar.</p>
+        </details>
+        <details>
+          <summary>¿Necesito saber programar?</summary>
+          <p><strong>No.</strong> Claude escribe el código. Tú decides qué quieres, lo pruebas en el móvil y le dices qué no te cuadra. Vas a usar una terminal para unas pocas órdenes que Claude te dice exactamente cómo escribir.</p>
+        </details>
+        <details>
+          <summary>¿Y si me atasco?</summary>
+          <p>Copia el error entero y pégalo en el chat: <code>movil-arreglar</code> lo diagnostica con método. Claude tiene que enseñarte pruebas de que está arreglado, y si se atasca dos veces en lo mismo, para y te lo explica. Todo está guardado con git, así que siempre se puede volver atrás. Si no sale, <a href="https://github.com/devidbarreiro/kit-apps-moviles/issues/new/choose">abre un <em>issue</em></a>.</p>
+        </details>
+        <details>
+          <summary>¿Cuánto se tarda?</summary>
+          <p>Con 5-8 horas a la semana, <strong>entre 6 y 12 semanas</strong> para una primera versión pequeña, más los plazos de las tiendas: Apple revisa la mayoría de apps en menos de 48 horas; Google puede tardar hasta 7 días con cuentas nuevas, y si tu cuenta personal es nueva, suma 14 días de prueba cerrada. Es una estimación, no una promesa.</p>
+        </details>
+        <details>
+          <summary>¿Qué pasa si se me acaba el uso de Claude?</summary>
+          <p>El plan Pro tiene un límite que se reinicia cada 5 horas y otro semanal. No pierdes nada: el plan de tu app está en <code>plan/ESTADO.md</code>. Espera al reinicio, abre Claude Code en la carpeta de tu app y escribe <code>/kit-movil:movil</code>.</p>
+        </details>
+        <details>
+          <summary>¿Por qué Expo?</summary>
+          <p>Es la forma oficial y más sencilla de hacer apps de iPhone y Android con una sola base de código, y su servicio en la nube compila y sube la app a las tiendas sin necesidad de Mac.</p>
+        </details>
+      </div>
+
+      <div class="aviso" role="note">
+        <h3>v0.1 · en pruebas</h3>
+        <p>El kit funciona, pero todavía lo ha usado poca gente. Si algo no va como dice, cuéntanoslo en GitHub: así mejora para la siguiente persona.</p>
+        <p><strong>No es asesoramiento legal, fiscal ni profesional.</strong> Las plantillas legales son orientativas y los requisitos de Apple y Google cambian: Claude los comprueba en las fuentes oficiales, pero la última palabra la tienen ellos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" aria-labelledby="cierre-t">
+    <div class="envoltura">
+      <div class="cierre">
+        <h2 id="cierre-t">Tu app, en tu móvil, <span class="remate">esta misma tarde.</span></h2>
+        <p>La primera versión en blanco, con su nombre, abierta en tu teléfono. Lo demás, un hito cada vez.</p>
+        <div class="acciones">
+          <a class="boton boton-principal" href="#instalar">Instalar el kit</a>
+          <a class="boton boton-fantasma" href="https://github.com/devidbarreiro/kit-apps-moviles" rel="noopener">Ver el código</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="envoltura pie">
+    <p style="margin:0">Licencia <a href="https://github.com/devidbarreiro/kit-apps-moviles/blob/main/LICENSE">MIT</a> © 2026 David Barreiro · Tipografía Montserrat (<a href="fuentes/OFL.txt">OFL</a>)</p>
+    <nav aria-label="Enlaces del proyecto">
+      <a href="https://github.com/devidbarreiro/kit-apps-moviles" rel="noopener">Repositorio</a>
+      <a href="https://github.com/devidbarreiro/kit-apps-moviles/issues" rel="noopener">Issues</a>
+      <a href="https://github.com/devidbarreiro/kit-apps-moviles/blob/main/CHANGELOG.md" rel="noopener">Cambios</a>
+      <a href="https://github.com/devidbarreiro/kit-apps-moviles/blob/main/ROADMAP.md" rel="noopener">Lo que viene</a>
+      <a href="https://github.com/devidbarreiro/kit-apps-moviles/blob/main/docs/lecciones.md" rel="noopener">Lecciones</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.copiar').forEach(function (boton) {
+  boton.addEventListener('click', function () {
+    var texto = boton.parentElement.querySelector('code').textContent;
+    var hecho = function () {
+      boton.textContent = 'Copiado';
+      boton.classList.add('hecho');
+      setTimeout(function () { boton.textContent = 'Copiar'; boton.classList.remove('hecho'); }, 1800);
+    };
+    var aMano = function () {
+      var area = document.createElement('textarea');
+      area.value = texto;
+      area.setAttribute('readonly', '');
+      area.style.position = 'fixed';
+      area.style.opacity = '0';
+      document.body.appendChild(area);
+      area.select();
+      try { document.execCommand('copy'); hecho(); } catch (e) { boton.textContent = 'Selecciona'; }
+      document.body.removeChild(area);
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(texto).then(hecho, aMano);
+    } else {
+      aMano();
+    }
+  });
+});
+</script>
+</body>
+</html>
